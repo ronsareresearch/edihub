@@ -582,7 +582,6 @@ npm run dev -- --port 3001
 
 ## License
 
-[Add your license here]
 
 ## Support
 
@@ -592,8 +591,6 @@ For issues and questions:
 - Review documentation in `/docs` directory
 
 ## Contributing
-
-[Add contribution guidelines here]
 
 ---
 
