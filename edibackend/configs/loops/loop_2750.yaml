@@ -1,0 +1,192 @@
+- loop_id: 2750
+  name: reporting category
+  segments:
+  - segment_code: N1
+    name: reporting category
+    position: 6882
+    usage:
+    - S
+    repeat: 1
+    max_elements: 6
+    syntax:
+    - R0203
+    - R0204
+    elements:
+    - ref_designator: N101
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 75
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. 75 = Participant
+    - ref_designator: N102
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 2
+      data_element: 93
+      notes: Free-form name. At least one of 'Name' or 'ID Code Qualifier' is required
+    - ref_designator: N103
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 3
+      data_element: 66
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N104
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - O
+      order: 4
+      data_element: 67
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N105
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - O
+      order: 5
+      data_element: 706
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N106
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 6
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: REF
+    name: reporting category reference
+    position: 6883
+    usage:
+    - S
+    repeat: 1
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference identification qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 0
+      - 17
+      - 18
+      - 19
+      - 26
+      - 3L
+      - 6M
+      - 9V
+      - 9X
+      - GE
+      - LU
+      - PID
+      - XX1
+      - XX2
+      - YY
+      - ZZ
+      data_element: 128
+      notes: Code qualifying the Reference Identification. 00 = Contracting District Number, 17 = Client Reporting Category, 18 = Plan Number, 19 = Division Identifier, 26 = Group Number, 3L = Branch Identifier, 6M = Sub-group Number, 9V = Payment Category, 9X = Group Number, GE = Group Employer Number, LU = Location Number, PID = Plan Identification Number, XX1 = Health Care Claim Number, XX2 = Health Care Claim Number, YY = Clearinghouse, ZZ = Mutually Defined
+    - ref_designator: REF02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier. If 'Reference Ident Qual' is present, then 'Reference Ident' is required
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - O
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: ID
+      min_length: 0
+      max_length: 0
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: DTP
+    name: reporting category date
+    position: 6884
+    usage:
+    - S
+    repeat: 1
+    max_elements: 3
+    elements:
+    - ref_designator: DTP01
+      name: date/time qualifier
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 7
+      data_element: 374
+      notes: Code specifying type of date or time, or both date and time. 007 = Effective
+    - ref_designator: DTP02
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D8
+      - RD8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD, RD8 = Range of Dates Expressed in Format CCYYMMDD-CCYYMMDD
+    - ref_designator: DTP03
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 3
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times

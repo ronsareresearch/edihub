@@ -1,0 +1,254 @@
+version: '1.0'
+description: edi 834 configuration (control segments - envelopes)
+control_segments:
+  ISA:
+    name: interchange control header
+    max_elements: 16
+    usage: ['R']
+    elements:
+    - ref_designator: ISA01
+      name: authorization information qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage: ['M']
+      order: 1
+      qualifier: [00, 03]
+      data_element: ['I01']
+    - ref_designator: ISA02
+      name: authorization information
+      data_type: AN
+      min_length: 10
+      max_length: 10
+      usage: ['M']
+      order: 2
+      data_element: ['I02']
+    - ref_designator: ISA03
+      name: security information qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage: ['M']
+      order: 3
+      qualifier: [00, 01]
+      data_element: ['I03']
+    - ref_designator: ISA04
+      name: security information
+      data_type: AN
+      min_length: 10
+      max_length: 10
+      usage: ['M']
+      order: 4
+      data_element: ['I04']
+    - ref_designator: ISA05
+      name: interchange id qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage: ['M']
+      order: 5
+      qualifier: [01, 14, 20, 27, 28, 29, 30, 33, 'ZZ']
+      data_element: ['I05']
+    - ref_designator: ISA06
+      name: interchange sender id
+      data_type: AN
+      min_length: 15
+      max_length: 15
+      usage: ['M']
+      order: 6
+      data_element: ['I06']
+    - ref_designator: ISA07
+      name: interchange id qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage: ['M']
+      order: 7
+      qualifier: [01, 14, 20, 27, 28, 29, 30, 33, 'ZZ']
+      data_element: ['I05']
+    - ref_designator: ISA08
+      name: interchange receiver id
+      data_type: AN
+      min_length: 15
+      max_length: 15
+      usage: ['M']
+      order: 8
+      data_element: ['I07']
+    - ref_designator: ISA09
+      name: interchange date
+      data_type: DT
+      min_length: 6
+      max_length: 6
+      usage: ['M']
+      order: 9
+      data_element: ['I08']
+    - ref_designator: ISA10
+      name: interchange time
+      data_type: TM
+      min_length: 4
+      max_length: 4
+      usage: ['M']
+      order: 10
+      data_element: ['I09']
+    - ref_designator: ISA11
+      name: repetition separator
+      data_type: ''
+      min_length: 1
+      max_length: 1
+      usage: ['M']
+      order: 11
+      data_element: ['I65']
+    - ref_designator: ISA12
+      name: interchange control version number
+      data_type: ID
+      min_length: 5
+      max_length: 5
+      usage: ['M']
+      order: 12
+      qualifier: [00501]
+      data_element: ['I11']
+    - ref_designator: ISA13
+      name: interchange control number
+      data_type: N
+      min_length: 9
+      max_length: 9
+      usage: ['M']
+      order: 13
+      data_element: ['I12']
+    - ref_designator: ISA14
+      name: acknowledgment requested
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage: ['M']
+      order: 14
+      qualifier: [0, 1]
+      data_element: ['I13']
+    - ref_designator: ISA15
+      name: usage indicator
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage: ['M']
+      order: 15
+      qualifier: ['P', 'T']
+      data_element: ['I14']
+    - ref_designator: ISA16
+      name: component element separator
+      data_type: ''
+      min_length: 1
+      max_length: 1
+      usage: ['M']
+      order: 16
+      data_element: ['I15']
+  GS:
+    name: functional group header
+    max_elements: 8
+    usage: ['R']
+    elements:
+    - ref_designator: GS01
+      name: functional identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage: ['M']
+      order: 1
+      data_element: [479]
+    - ref_designator: GS02
+      name: application sender's code
+      data_type: AN
+      min_length: 2
+      max_length: 15
+      usage: ['M']
+      order: 2
+      data_element: [142]
+    - ref_designator: GS03
+      name: application receiver's code
+      data_type: AN
+      min_length: 2
+      max_length: 15
+      usage: ['M']
+      order: 3
+      data_element: [124]
+    - ref_designator: GS04
+      name: date
+      data_type: DT
+      min_length: 8
+      max_length: 8
+      usage: ['M']
+      order: 4
+      data_element: [373]
+    - ref_designator: GS05
+      name: time
+      data_type: TM
+      min_length: 4
+      max_length: 8
+      usage: ['M']
+      order: 5
+      data_element: [337]
+    - ref_designator: GS06
+      name: group control number
+      data_type: N
+      min_length: 1
+      max_length: 9
+      usage: ['M']
+      order: 6
+      data_element: [28]
+    - ref_designator: GS07
+      name: responsible agency code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage: ['M']
+      order: 7
+      data_element: [455]
+    - ref_designator: GS08
+      name: version/release/industry identifier code
+      data_type: AN
+      min_length: 1
+      max_length: 12
+      usage: ['M']
+      order: 8
+      data_element: [480]
+  GE:
+    name: functional group trailer
+    max_elements: 2
+    usage: ['R']
+    elements:
+    - ref_designator: GE01
+      name: number of transaction sets included
+      data_type: N
+      min_length: 1
+      max_length: 6
+      usage: ['M']
+      order: 1
+      data_element: [97]
+    - ref_designator: GE02
+      name: group control number
+      data_type: N
+      min_length: 1
+      max_length: 9
+      usage: ['M']
+      order: 2
+      data_element: [28]
+  IEA:
+    name: interchange control trailer
+    max_elements: 2
+    usage: ['R']
+    elements:
+    - ref_designator: IEA01
+      name: number of included functional groups
+      data_type: N
+      min_length: 1
+      max_length: 5
+      usage: ['M']
+      order: 1
+      data_element: ['I16']
+    - ref_designator: IEA02
+      name: interchange control number
+      data_type: N
+      min_length: 9
+      max_length: 9
+      usage: ['M']
+      order: 2
+      data_element: ['I12']

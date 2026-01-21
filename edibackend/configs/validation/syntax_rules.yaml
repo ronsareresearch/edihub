@@ -1,0 +1,760 @@
+version: '1.0'
+description: Syntax rules for EDI 834 (generated from database)
+generated_from_db: true
+generation_date: '2026-01-18T13:04:53.086941'
+syntax_rules:
+  1:
+    description: If either X or Y is present, then the other is required
+  2:
+    description: If X is present, then Y is required
+  3:
+    description: Only one of X, Y may be present
+  4:
+    description: Atleast one of X,Y is required
+  5:
+    description: If X is present, then atleast one of Y or Z are required
+segment_syntax:
+- rule_id: SYN_001
+  name: RE R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: RE
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - TRANSACTIONAL
+- rule_id: SYN_002
+  name: QT R0204 - Atleast one of X,Y is required
+  syntax_code: R0204
+  segment: QT
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - TRANSACTIONAL
+- rule_id: SYN_003
+  name: QT E0204 - Only one of X, Y may be present
+  syntax_code: E0204
+  segment: QT
+  description: Only one of X, Y may be present
+  syntax_rule_id: null
+  applies_to_loops:
+  - TRANSACTIONAL
+- rule_id: SYN_004
+  name: BG C0504 - If X is present, then Y is required
+  syntax_code: C0504
+  segment: BG
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - TRANSACTIONAL
+- rule_id: SYN_005
+  name: N1 R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000A
+- rule_id: SYN_006
+  name: N1 R0204 - Atleast one of X,Y is required
+  syntax_code: R0204
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000A
+- rule_id: SYN_007
+  name: N1 R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000B
+- rule_id: SYN_008
+  name: N1 R0204 - Atleast one of X,Y is required
+  syntax_code: R0204
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000B
+- rule_id: SYN_009
+  name: N1 R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000C
+- rule_id: SYN_010
+  name: N1 R0204 - Atleast one of X,Y is required
+  syntax_code: R0204
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - 1000C
+- rule_id: SYN_011
+  name: AC C0506 - If X is present, then Y is required
+  syntax_code: C0506
+  segment: AC
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 1100C
+- rule_id: SYN_012
+  name: RE R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: RE
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2000'
+- rule_id: SYN_013
+  name: IN P1112 - If either X or Y is present, then the other is required
+  syntax_code: P1112
+  segment: IN
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2000'
+- rule_id: SYN_014
+  name: DM P0102 - If either X or Y is present, then the other is required
+  syntax_code: P0102
+  segment: DM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_015
+  name: DM P1011 - If either X or Y is present, then the other is required
+  syntax_code: P1011
+  segment: DM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_016
+  name: DM C1105 - If X is present, then Y is required
+  syntax_code: C1105
+  segment: DM
+  description: If X is present, then Y is required
+  syntax_rule_id: null
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_017
+  name: LU P0102 - If either X or Y is present, then the other is required
+  syntax_code: P0102
+  segment: LU
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_018
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_019
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_020
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_021
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_022
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_023
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_024
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_025
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100A
+- rule_id: SYN_026
+  name: DM P0102 - If either X or Y is present, then the other is required
+  syntax_code: P0102
+  segment: DM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100B
+- rule_id: SYN_027
+  name: DM P1011 - If either X or Y is present, then the other is required
+  syntax_code: P1011
+  segment: DM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100B
+- rule_id: SYN_028
+  name: DM C1105 - If X is present, then Y is required
+  syntax_code: C1105
+  segment: DM
+  description: If X is present, then Y is required
+  syntax_rule_id: null
+  applies_to_loops:
+  - 2100B
+- rule_id: SYN_029
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100B
+- rule_id: SYN_030
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100B
+- rule_id: SYN_031
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100C
+- rule_id: SYN_032
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100C
+- rule_id: SYN_033
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100C
+- rule_id: SYN_034
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100C
+- rule_id: SYN_035
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_036
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_037
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_038
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_039
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_040
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_041
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_042
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100D
+- rule_id: SYN_043
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_044
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_045
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_046
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_047
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_048
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_049
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_050
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100E
+- rule_id: SYN_051
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_052
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_053
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_054
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_055
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_056
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_057
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_058
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100F
+- rule_id: SYN_059
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_060
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_061
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_062
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_063
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_064
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_065
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_066
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100G
+- rule_id: SYN_067
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - 2100H
+- rule_id: SYN_068
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100H
+- rule_id: SYN_069
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100H
+- rule_id: SYN_070
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - 2100H
+- rule_id: SYN_071
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - 2100H
+- rule_id: SYN_072
+  name: DS P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: DS
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2200'
+- rule_id: SYN_073
+  name: RE R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: RE
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2300'
+- rule_id: SYN_074
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_075
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_076
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_077
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_078
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_079
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_080
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_081
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2310'
+- rule_id: SYN_082
+  name: RE R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: RE
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2320'
+- rule_id: SYN_083
+  name: N4 E0207 - Only one of X, Y may be present
+  syntax_code: E0207
+  segment: N4
+  description: Only one of X, Y may be present
+  syntax_rule_id: 3
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_084
+  name: N4 C0704 - If X is present, then Y is required
+  syntax_code: C0704
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_085
+  name: N4 C0605 - If X is present, then Y is required
+  syntax_code: C0605
+  segment: N4
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_086
+  name: NM C1203 - If X is present, then Y is required
+  syntax_code: C1203
+  segment: NM
+  description: If X is present, then Y is required
+  syntax_rule_id: 2
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_087
+  name: NM P0809 - If either X or Y is present, then the other is required
+  syntax_code: P0809
+  segment: NM
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_088
+  name: PE P0304 - If either X or Y is present, then the other is required
+  syntax_code: P0304
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_089
+  name: PE P0506 - If either X or Y is present, then the other is required
+  syntax_code: P0506
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_090
+  name: PE P0708 - If either X or Y is present, then the other is required
+  syntax_code: P0708
+  segment: PE
+  description: If either X or Y is present, then the other is required
+  syntax_rule_id: 1
+  applies_to_loops:
+  - '2330'
+- rule_id: SYN_091
+  name: RE R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: RE
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2750'
+- rule_id: SYN_092
+  name: N1 R0203 - Atleast one of X,Y is required
+  syntax_code: R0203
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2750'
+- rule_id: SYN_093
+  name: N1 R0204 - Atleast one of X,Y is required
+  syntax_code: R0204
+  segment: N1
+  description: Atleast one of X,Y is required
+  syntax_rule_id: 4
+  applies_to_loops:
+  - '2750'

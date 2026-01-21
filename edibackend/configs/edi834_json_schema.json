@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://treo-enrollment.com/schemas/edi834.json",
+  "title": "EDI 834 Enrollment JSON Schema",
+  "description": "JSON schema for parsed EDI 834 Benefit Enrollment and Maintenance transaction set",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["interchange", "functional_group", "transaction_set", "metadata"],
+  "properties": {
+    "interchange": {
+      "type": "object",
+      "required": ["isa"],
+      "properties": {
+        "isa": {
+          "type": "object",
+          "properties": {
+            "isa01_auth_info_qual": {"type": "string"},
+            "isa02_auth_info": {"type": "string"},
+            "isa03_security_info_qual": {"type": "string"},
+            "isa04_security_info": {"type": "string"},
+            "isa05_interchange_id_qual": {"type": "string"},
+            "isa06_interchange_sender_id": {"type": "string"},
+            "isa07_interchange_id_qual_2": {"type": "string"},
+            "isa08_interchange_receiver_id": {"type": "string"},
+            "isa09_interchange_date": {"type": "string"},
+            "isa10_interchange_time": {"type": "string"},
+            "isa11_repetition_sep": {"type": "string"},
+            "isa12_interchange_version": {"type": "string"},
+            "isa13_interchange_control_num": {"type": "string"},
+            "isa14_ack_requested": {"type": "string"},
+            "isa15_usage_indicator": {"type": "string"},
+            "isa16_component_sep": {"type": "string"}
+          }
+        },
+        "iea": {
+          "type": "object",
+          "properties": {
+            "iea01_num_groups": {"type": "string"},
+            "iea02_interchange_control_num": {"type": "string"}
+          }
+        }
+      }
+    },
+    "functional_group": {
+      "type": "object",
+      "required": ["gs"],
+      "properties": {
+        "gs": {
+          "type": "object",
+          "properties": {
+            "gs01_functional_id_code": {"type": "string"},
+            "gs02_app_sender_code": {"type": "string"},
+            "gs03_app_receiver_code": {"type": "string"},
+            "gs04_date": {"type": "string"},
+            "gs05_time": {"type": "string"},
+            "gs06_group_control_num": {"type": "string"},
+            "gs07_responsible_agency_code": {"type": "string"},
+            "gs08_version_release_id": {"type": "string"}
+          }
+        },
+        "ge": {
+          "type": "object",
+          "properties": {
+            "ge01_num_transactions": {"type": "string"},
+            "ge02_group_control_num": {"type": "string"}
+          }
+        }
+      }
+    },
+    "transaction_set": {
+      "type": "object",
+      "required": ["st", "bgn", "se"],
+      "properties": {
+        "st": {
+          "type": "object",
+          "required": ["st01_id_code", "st02_control_num"],
+          "properties": {
+            "st01_id_code": {"type": "string", "const": "834"},
+            "st02_control_num": {"type": "string"},
+            "st03_impl_guide": {"type": "string"}
+          }
+        },
+        "bgn": {
+          "type": "object",
+          "required": ["bgn01_purpose_code", "bgn02_ref_id", "bgn03_date"],
+          "properties": {
+            "bgn01_purpose_code": {"type": "string"},
+            "bgn02_ref_id": {"type": "string"},
+            "bgn03_date": {"type": "string"},
+            "bgn04_time": {"type": "string"},
+            "bgn05_time_code": {"type": "string"},
+            "bgn06_ref_id": {"type": "string"},
+            "bgn07_transaction_type_code": {"type": "string"},
+            "bgn08_action_code": {"type": "string"},
+            "bgn09_security_level_code": {"type": "string"}
+          }
+        },
+        "qty": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "qty01_code": {"type": "string"},
+              "qty02_count": {"type": "string"}
+            }
+          }
+        },
+        "ref": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ref01_qualifier": {"type": "string"},
+              "ref02_ref_id": {"type": "string"}
+            }
+          }
+        },
+        "n1_loops": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "1000A": {"type": "object"},
+              "1000B": {"type": "object"},
+              "1000C": {"type": "object"},
+              "1100C": {"type": "object"}
+            }
+          }
+        },
+        "ins_loops": {
+          "type": "array",
+          "items": {"type": "object"}
+        },
+        "se": {
+          "type": "object",
+          "required": ["se01_num_segments", "se02_control_num"],
+          "properties": {
+            "se01_num_segments": {"type": ["string", "integer"]},
+            "se02_control_num": {"type": "string"}
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["parser_version", "parsed_at"],
+      "properties": {
+        "parser_version": {"type": "string"},
+        "parsed_at": {"type": "string"},
+        "total_segments": {"type": "integer"},
+        "total_members": {"type": "integer"},
+        "total_coverages": {"type": "integer"},
+        "total_dependents": {"type": "integer"},
+        "validation_applied": {"type": "boolean"},
+        "validation_rules_version": {"type": "string"}
+      }
+    }
+  }
+}

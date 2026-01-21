@@ -1,0 +1,18 @@
+# This file is auto-generated from pyproject.toml when using uv
+# Source of truth: pyproject.toml
+# To sync: uv pip compile pyproject.toml -o requirements.txt
+# Or use: uv sync (recommended - uses pyproject.toml directly)
+
+alembic==1.17.2
+annotated-types==0.7.0
+greenlet==3.3.0
+mako==1.3.10
+markupsafe==3.0.3
+psycopg2-binary==2.9.11
+pydantic==2.12.5
+pydantic-core==2.41.5
+pydantic-settings==2.12.0
+python-dotenv==1.2.1
+sqlalchemy==2.0.45
+typing-extensions==4.15.0
+typing-inspection==0.4.2

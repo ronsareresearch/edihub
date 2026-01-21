@@ -1,0 +1,82 @@
+- loop_id: 1000a
+  name: sponsor name
+  segments:
+  - segment_code: N1
+    name: sponsor name
+    position: 448
+    usage:
+    - R
+    repeat: 1
+    max_elements: 6
+    syntax:
+    - R0203
+    - P0304
+    elements:
+    - ref_designator: N101
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - P5
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. P5 = Plan Sponsor
+    - ref_designator: N102
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 2
+      data_element: 93
+      notes: Free-form name. At least one of 'Name' or 'ID Code Qualifier' is required.
+    - ref_designator: N103
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 3
+      qualifier:
+      - 24
+      - 94
+      - FI
+      data_element: 66
+      notes: Code designating the system/method of code structure used for Identification Code. 24 = Employer's Identification Number, 94 = Code assigned by the organization that is the ultimate destination of the transaction set, FI = Federal Taxpayer's Identification Number. If 'ID Code' is present, then 'ID Code Qualifier' is required
+    - ref_designator: N104
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 4
+      data_element: 67
+      notes: Code identifying a party or other code. If 'ID Code Qualifier' is present, then 'ID Code' is required
+    - ref_designator: N105
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - O
+      order: 5
+      data_element: 706
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N106
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 6
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true

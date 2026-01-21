@@ -1,0 +1,149 @@
+- loop_id: 2200
+  name: disability information
+  segments:
+  - segment_code: DSB
+    name: disability information
+    position: 2000
+    usage:
+    - S
+    repeat: 1
+    max_elements: 8
+    syntax:
+    - P0708
+    elements:
+    - ref_designator: DSB01
+      name: disability type code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      data_element: 1146
+      notes: Code identifying the disability status of the individual. 1 = Short Term Disability, 2 = Long Term Disability, 3 = Permanent or Total Disability, 4 = No Disability
+    - ref_designator: DSB02
+      name: quantity
+      data_type: R
+      min_length: 1
+      max_length: 15
+      usage:
+      - O
+      order: 2
+      data_element: 380
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DSB03
+      name: occupation code
+      data_type: ID
+      min_length: 4
+      max_length: 6
+      usage:
+      - O
+      order: 3
+      data_element: 1149
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DSB04
+      name: work intensity code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      data_element: 1154
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DSB05
+      name: product option code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 5
+      data_element: 1161
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DSB06
+      name: monetary amount
+      data_type: R
+      min_length: 1
+      max_length: 18
+      usage:
+      - O
+      order: 6
+      data_element: 782
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DSB07
+      name: product/service id qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 7
+      qualifier:
+      - DX
+      - ZZ
+      data_element: 235
+      notes: Code identifying the type/source of the descriptive number used in Product/Service ID. DX = International Classification of Diseases, 9th Revision, Clinical Modification (ICD-9-CM) - Diagnosis, ZZ = Mutually Defined. Required when a value is being reported in the DSB08 element. If 'Medical Code Value' is present, then 'Product/Service ID Qualifier' is required
+    - ref_designator: DSB08
+      name: medical code value
+      data_type: AN
+      min_length: 1
+      max_length: 15
+      usage:
+      - X
+      order: 8
+      data_element: 1137
+      notes: Code value for describing a medical condition or procedure. If 'Product/Service ID Qualifier' is present, then 'Medical Code Value' is required
+  - segment_code: DTP
+    name: disability eligibility dates
+    position: 2100
+    usage:
+    - S
+    repeat: 2
+    max_elements: 3
+    elements:
+    - ref_designator: DTP01
+      name: date/time qualifier
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 360
+      - 361
+      data_element: 374
+      notes: Code specifying type of date or time, or both date and time. 360 = Initial Disability Period Start, 361 = Initial Disability Period End
+    - ref_designator: DTP02
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD
+    - ref_designator: DTP03
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 3
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times

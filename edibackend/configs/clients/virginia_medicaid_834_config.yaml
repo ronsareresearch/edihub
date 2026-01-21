@@ -1,0 +1,156 @@
+# virginia medicaid client customization config
+# date: 2026-01-14
+# purpose: client-specific customizations for virginia medicaid edi 834 files
+
+client_id: 1
+client_name: "Virginia Medicaid"
+base_config_version: "1.0"
+config_version: "1.0"
+
+description: |
+  virginia medicaid customizations for edi 834 parsing (companion guide v2.8, sep 2022).
+  key customizations:
+  - dtp*356/357 (eligibility begin/end dates) in loop 2000
+  - ref*38 (master policy number) in header loop
+  - ref*17 (client reporting category) in loop 2000 and loop 2300
+  - ls/le boundaries required for loop 2700 (mac id reporting)
+  - n405/n406 (location qualifier 60 = area, fips code) in loop 2100a
+
+# customizations (overrides/extensions to base config)
+customizations:
+  # custom dtp qualifiers (virginia medicaid specific)
+  segments:
+    - segment_code: "DTP"
+      loop_context: "2000"  # member level detail
+      custom_elements:
+        - ref_designator: "DTP01"
+          qualifier_values: ["356", "357"]
+          notes: "356 - eligibility begin date, 357 - eligibility end date (for mcos, mmps, behavioral health, and dental service providers)"
+        - ref_designator: "DTP01"
+          qualifier_values: ["300"]
+          notes: "300 - enrollment signature date for transportation service provider"
+  
+    # custom ref qualifiers (virginia medicaid specific)
+    - segment_code: "REF"
+      loop_context: "header"  # header loop
+      custom_qualifiers:
+        - qualifier: "38"
+          description: "master policy number"
+          max_elements: 4
+          notes: "ref02 contains provider npi or dmas assigned api (page 36)"
+  
+    - segment_code: "REF"
+      loop_context: "2000"  # member level detail
+      custom_qualifiers:
+        - qualifier: "17"
+          description: "client reporting category"
+          max_elements: 4
+          notes: "ref02 contains program designation code (page 57)"
+        - qualifier: "3H"
+          description: "case number"
+          max_elements: 4
+          notes: "ref02 contains case number (page 57)"
+        - qualifier: "ZZ"
+          description: "mutually defined"
+          max_elements: 4
+          notes: "ref02 contains cz-x cr-ccyymmdd ed-ccyymmdd (citizenship status, case review date, expected delivery) - concatenated with spaces (page 57-59)"
+  
+    - segment_code: "REF"
+      loop_context: "2300"  # health coverage
+      custom_qualifiers:
+        - qualifier: "17"
+          description: "client reporting category (indicates managed care benefit)"
+          max_elements: 4
+          notes: "ref02 contains aid category (page 1048-1068)"
+        - qualifier: "1L"
+          description: "group or policy number"
+          max_elements: 4
+          notes: "ref02 contains first two characters of benefit plan. for mcos and transportation: default to 00. for behavioral health and dental: default to 01. (page 146-147)"
+  
+    - segment_code: "REF"
+      loop_context: "2320"  # coordination of benefits
+      custom_qualifiers:
+        - qualifier: "60"
+          description: "account suffix code"
+          max_elements: 4
+          notes: "ref02 contains tpl coverage type (page 166-167)"
+        - qualifier: "ZZ"
+          description: "mutually defined"
+          max_elements: 4
+          notes: "ref02 contains tpl carrier id (page 166-167)"
+  
+    - segment_code: "DTP"
+      loop_context: "2320"  # coordination of benefits
+      custom_elements:
+        - ref_designator: "DTP01"
+          qualifier_values: ["344", "345"]
+          notes: "344 - cob begin date, 345 - cob end date. dtp03 contains tpl begin/end date (page 168)"
+  
+  # loop 2700 customizations (ls/le boundaries required per companion guide)
+  loops:
+    - loop_id: "2700"
+      customizations:
+        ls_le_required: true
+        notes: "virginia medicaid uses ls/le boundaries for loop 2700 (page 1710-1819). used for ccc plus npis to identify member's medicare administrative contractor id (mac id)"
+        ls_le_loop_id: "2700"  # ls01 and le01 both use value 2700
+        segment_order:
+          - "LS"  # loop header with ls01=2700
+          - "LX"  # member reporting categories (loop 2710/2700)
+          - "N1"  # in loop 2750: n101=75 (participant), n102=member reporting category name
+          - "REF"  # in loop 2750: ref01=zz, ref02=alphanumeric mac id (de 9064)
+          - "DTP"  # in loop 2750: dtp01=007, dtp02=d8, dtp03=effective date
+          - "LE"  # loop trailer with le01=2700
+  
+  # element mappings (if needed for transformation)
+  element_mappings:
+    - from: "N405"
+      to: "location_qualifier"
+      loop_context: "2100A"
+      notes: "n405 – location qualifier: 60 – area (page 70)"
+    - from: "N406"
+      to: "fips_code"
+      loop_context: "2100A"
+      notes: "n406 – location identifier: fips code (page 70)"
+    - from: "DTP01=356"
+      to: "eligibility_begin_date"
+      loop_context: "2000"
+      notes: "dtp01=356 in loop 2000 - eligibility begin date (page 59-60)"
+    - from: "DTP01=357"
+      to: "eligibility_end_date"
+      loop_context: "2000"
+      notes: "dtp01=357 in loop 2000 - eligibility end date (page 59-60)"
+    - from: "REF01=38"
+      to: "master_policy_number"
+      loop_context: "header"
+      notes: "ref02 in header ref*38 - provider npi or dmas assigned api (page 36)"
+    - from: "REF01=17"
+      to: "client_reporting_category"
+      loop_context: "2000,2300"
+      notes: "ref02 in loop 2000/2300 ref*17 - program designation code or aid category (page 57, 1048)"
+    - from: "REF01=1L"
+      to: "benefit_plan_code"
+      loop_context: "2300"
+      notes: "ref02 in additional loop 2300 ref*1l - first two characters of benefit plan (page 146-147)"
+    - from: "REF01=60"
+      to: "tpl_coverage_type"
+      loop_context: "2320"
+      notes: "ref02 in loop 2320 ref*60 - tpl coverage type (page 166-167)"
+    - from: "REF01=ZZ"
+      to: "tpl_carrier_id"
+      loop_context: "2320"
+      notes: "ref02 in loop 2320 ref*zz - tpl carrier id (page 166-167)"
+    - from: "DTP01=344"
+      to: "tpl_begin_date"
+      loop_context: "2320"
+      notes: "dtp03 in loop 2320 dtp*344 - tpl begin date (page 168)"
+    - from: "DTP01=345"
+      to: "tpl_end_date"
+      loop_context: "2320"
+      notes: "dtp03 in loop 2320 dtp*345 - tpl end date (page 168)"
+
+# validation overrides (if any)
+validation_overrides:
+  - rule_code: "FILE_CONTROL_ST_SE"
+    mode: "warning"
+    notes: "allow warnings for st/se control number mismatches in test mode"
+

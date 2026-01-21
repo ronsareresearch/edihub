@@ -1,0 +1,21 @@
+- loop_id: 2700
+  name: member reporting categories
+  segments:
+  - segment_code: LX
+    name: member reporting categories
+    position: 6881
+    usage:
+    - S
+    repeat: 1
+    max_elements: 1
+    elements:
+    - ref_designator: LX01
+      name: assigned number
+      data_type: N0
+      min_length: 1
+      max_length: 6
+      usage:
+      - M
+      order: 1
+      data_element: 554
+      notes: Number assigned for differentiation within a transaction set

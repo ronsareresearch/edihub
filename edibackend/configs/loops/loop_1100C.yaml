@@ -1,0 +1,112 @@
+- loop_id: 1100c
+  name: tpa/broker account information
+  segments:
+  - segment_code: ACT
+    name: tpa/broker account information
+    position: 1200
+    usage:
+    - S
+    repeat: 1
+    max_elements: 9
+    syntax:
+    - P0304
+    - C0506
+    - C0705
+    elements:
+    - ref_designator: ACT01
+      name: account number
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 1
+      data_element: 508
+      notes: Account number assigned
+    - ref_designator: ACT02
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 2
+      data_element: 93
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT03
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 3
+      data_element: 66
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT04
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 4
+      data_element: 67
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT05
+      name: account number qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 5
+      data_element: 569
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT06
+      name: account number
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - X
+      order: 6
+      data_element: 508
+      notes: Account number assigned
+    - ref_designator: ACT07
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - O
+      order: 7
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT08
+      name: payment method type code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 8
+      data_element: 107
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: ACT09
+      name: benefit status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 9
+      data_element: 1216
+      notes: NOT USED
+      skip_if_notused: true

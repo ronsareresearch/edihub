@@ -1,0 +1,977 @@
+# Virginia Medicaid Business Rules for EDI 834
+# Version: 1.0
+# Date: 2026-01-14
+# Source: Virginia Medicaid Companion Guide v2.8 (September 14, 2022)
+# Description: Client-specific business rules and validations for Virginia Medicaid EDI 834 files
+
+version: '1.0'
+client_id: 1
+client_name: "Virginia Medicaid"
+companion_guide_version: "2.8"
+companion_guide_date: "September 14, 2022"
+
+description: |
+  Virginia Medicaid specific business rules and validations for EDI 834 processing.
+  These rules supplement the base EDI 834 validation rules and are specific to
+  Virginia Medicaid implementations.
+
+# Interchange Level Business Rules
+interchange_level:
+  # ISA Segment - Virginia Medicaid Requirements
+  - rule_id: "BIZ_VM_001"
+    name: "ISA01 - Authorization Information Qualifier"
+    segment: "ISA"
+    element: "ISA01"
+    required_value: "00"
+    allowed_values: ["00"]
+    message: "Virginia Medicaid requires ISA01 = '00' (No authorization information present)"
+    severity: "error"
+    page_reference: "C.4"
+  
+  - rule_id: "BIZ_VM_002A"
+    name: "ISA02 - Authorization Information (Optional for VA Medicaid)"
+    segment: "ISA"
+    element: "ISA02"
+    required: false
+    message: "Virginia Medicaid allows ISA02 to be empty (client customization)"
+    severity: "info"
+    page_reference: "C.4"
+    notes: "ISA02 is optional and may be empty in Virginia Medicaid files"
+  
+  - rule_id: "BIZ_VM_002B"
+    name: "ISA04 - Security Information (Optional for VA Medicaid)"
+    segment: "ISA"
+    element: "ISA04"
+    required: false
+    message: "Virginia Medicaid allows ISA04 to be empty (client customization)"
+    severity: "info"
+    page_reference: "C.4"
+    notes: "ISA04 is optional and may be empty in Virginia Medicaid files"
+  
+  - rule_id: "BIZ_VM_002"
+    name: "ISA03 - Security Information Qualifier"
+    segment: "ISA"
+    element: "ISA03"
+    required_value: "00"
+    allowed_values: ["00"]
+    message: "Virginia Medicaid requires ISA03 = '00' (No security information present)"
+    severity: "error"
+    page_reference: "C.4"
+  
+  - rule_id: "BIZ_VM_003"
+    name: "ISA06 - Interchange Sender ID"
+    segment: "ISA"
+    element: "ISA06"
+    required_value: "VAMMIS FA"
+    message: "Virginia Medicaid requires ISA06 = 'VAMMIS FA'"
+    severity: "error"
+    page_reference: "C.4-C.5"
+    notes: "Length validation is disabled for ISA06 (client customization - may be shorter than 15 characters)"
+  
+  - rule_id: "BIZ_VM_003A"
+    name: "ISA08 - Interchange Receiver ID (Length Validation Disabled)"
+    segment: "ISA"
+    element: "ISA08"
+    message: "Virginia Medicaid allows ISA08 to be shorter than standard length (client customization)"
+    severity: "info"
+    page_reference: "C.5"
+    notes: "Length validation is disabled for ISA08 (client customization - may be shorter than 15 characters)"
+  
+  - rule_id: "BIZ_VM_004"
+    name: "ISA05 - Interchange ID Qualifier"
+    segment: "ISA"
+    element: "ISA05"
+    required_value: "ZZ"
+    allowed_values: ["ZZ"]
+    message: "Virginia Medicaid requires ISA05 = 'ZZ' (mutually defined)"
+    severity: "error"
+    page_reference: "C.4"
+  
+  - rule_id: "BIZ_VM_004A"
+    name: "ISA07 - Interchange ID Qualifier"
+    segment: "ISA"
+    element: "ISA07"
+    required_value: "ZZ"
+    allowed_values: ["ZZ"]
+    message: "Virginia Medicaid requires ISA07 = 'ZZ' (Mutually defined)"
+    severity: "error"
+    page_reference: "C.5"
+  
+  - rule_id: "BIZ_VM_004B"
+    name: "ISA08 - Interchange Receiver ID"
+    segment: "ISA"
+    element: "ISA08"
+    description: "Medicaid Service Center"
+    message: "Virginia Medicaid requires ISA08 = Medicaid Service Center"
+    severity: "error"
+    page_reference: "C.5"
+  
+  - rule_id: "BIZ_VM_004C"
+    name: "ISA12 - Interchange Control Version Number"
+    segment: "ISA"
+    element: "ISA12"
+    required_value: "00501"
+    allowed_values: ["00501"]
+    message: "Virginia Medicaid requires ISA12 = '00501' (Version Number)"
+    severity: "error"
+    page_reference: "C.5"
+  
+  - rule_id: "BIZ_VM_004D"
+    name: "ISA14 - Acknowledgment Requested"
+    segment: "ISA"
+    element: "ISA14"
+    required_value: "0"
+    allowed_values: ["0"]
+    message: "Virginia Medicaid requires ISA14 = '0' (No Interchange Acknowledgment Requested)"
+    severity: "error"
+    page_reference: "C.6"
+  
+  - rule_id: "BIZ_VM_004E"
+    name: "ISA15 - Usage Indicator"
+    segment: "ISA"
+    element: "ISA15"
+    allowed_values: ["P", "T"]
+    message: "Virginia Medicaid requires ISA15 = 'P' (Production) or 'T' (Test)"
+    severity: "error"
+    page_reference: "C.6"
+  
+  - rule_id: "BIZ_VM_004F"
+    name: "ISA16 - Component Element Separator"
+    segment: "ISA"
+    element: "ISA16"
+    required_value: ">"
+    allowed_values: [">"]
+    message: "Virginia Medicaid requires ISA16 = '>'"
+    severity: "error"
+    page_reference: "C.6"
+
+# Functional Group Level Business Rules
+functional_group_level:
+  - rule_id: "BIZ_VM_005"
+    name: "GS02 - Application Sender's Code"
+    segment: "GS"
+    element: "GS02"
+    required_value: "VAMMIS FA"
+    message: "Virginia Medicaid requires GS02 = 'VAMMIS FA'"
+    severity: "error"
+    page_reference: "C.7"
+  
+  - rule_id: "BIZ_VM_006"
+    name: "GS03 - Application Receiver's Code"
+    segment: "GS"
+    element: "GS03"
+    validation: "4_digit_service_center_id"
+    format: "numeric"
+    length: 4
+    message: "Virginia Medicaid requires GS03 = 4 digit Service Center ID assigned by Virginia Medicaid"
+    severity: "error"
+    page_reference: "C.7"
+  
+  - rule_id: "BIZ_VM_007"
+    name: "GS08 - Version/Release/Industry Identifier Code"
+    segment: "GS"
+    element: "GS08"
+    required_value: "005010X220A1"
+    allowed_values: ["005010X220A1"]
+    message: "Virginia Medicaid requires GS08 = '005010X220A1'"
+    severity: "error"
+    page_reference: "C.8"
+
+# Transaction Set Level Business Rules
+transaction_set_level:
+  # Header Loop Business Rules
+  - rule_id: "BIZ_VM_008"
+    name: "REF*38 - Master Policy Number in Header"
+    segment: "REF"
+    loop: "header"
+    element: "REF01"
+    required_value: "38"
+    allowed_values: ["38"]
+    description: "Master Policy Number"
+    message: "Virginia Medicaid requires REF*38 in header loop"
+    severity: "error"
+    page_reference: "36"
+    element_mapping:
+      ref02: "master_policy_number"
+      notes: "REF02 contains Provider NPI or DMAS assigned API"
+  
+  - rule_id: "BIZ_VM_009"
+    name: "DTP*007 - File Effective Date"
+    segment: "DTP"
+    loop: "header"
+    element: "DTP01"
+    allowed_values: ["007"]
+    description: "Effective - File Effective Date"
+    message: "Virginia Medicaid uses DTP*007 for File Effective Date"
+    severity: "info"
+    page_reference: "37"
+  
+  # Loop 1000A Business Rules
+  - rule_id: "BIZ_VM_010"
+    name: "Loop 1000A - N102 Plan Sponsor Name"
+    segment: "N1"
+    loop: "1000A"
+    element: "N102"
+    required_value: "Department of Medical Assistance Services"
+    message: "Virginia Medicaid requires N102 = 'Department of Medical Assistance Services' in Loop 1000A"
+    severity: "error"
+    page_reference: "39"
+  
+  - rule_id: "BIZ_VM_011"
+    name: "Loop 1000A - N104 ID Code"
+    segment: "N1"
+    loop: "1000A"
+    element: "N104"
+    required_value: "546116277"
+    message: "Virginia Medicaid requires N104 = '546116277' (DMAS Federal Tax ID) in Loop 1000A"
+    severity: "error"
+    page_reference: "40"
+  
+  # Loop 2000 Business Rules - INS Segment
+  - rule_id: "BIZ_VM_012"
+    name: "Loop 2000 - INS03 Maintenance Type Code"
+    segment: "INS"
+    loop: "2000"
+    element: "INS03"
+    allowed_values:
+      mco_behavioral_health: ["021", "024", "030"]  # Add, Cancel, Audit
+      dental_mmp_daily: ["030"]  # Audit only
+      mmp_mid_month_end_month: ["021", "024", "030"]  # Add, Cancel, Audit
+    message: "Virginia Medicaid INS03 values vary by provider type and file type"
+    severity: "warning"
+    page_reference: "49-51"
+    notes: |
+      For MCOs and Behavioral Health: 021 (Add), 024 (Cancel), 030 (Audit)
+      For Dental, MMPs, and Behavioral Health Daily: 030 (Audit)
+      For MMPs mid-month and end of month files: 021 (Add), 024 (Cancel), 030 (Audit)
+  
+  - rule_id: "BIZ_VM_013"
+    name: "Loop 2000 - INS04 Maintenance Reason Code"
+    segment: "INS"
+    loop: "2000"
+    element: "INS04"
+    allowed_values:
+      transportation: ["XN"]  # Notification Only
+    message: "Virginia Medicaid Transportation Service Provider uses INS04 = 'XN' (Notification Only)"
+    severity: "info"
+    page_reference: "49-51"
+  
+  # Loop 2000 Business Rules - REF Segments
+  - rule_id: "BIZ_VM_014"
+    name: "Loop 2000 - REF*0F Subscriber Number"
+    segment: "REF"
+    loop: "2000"
+    element: "REF01"
+    required_value: "0F"
+    allowed_values: ["0F"]
+    description: "Subscriber number"
+    message: "Virginia Medicaid requires REF*0F in Loop 2000"
+    severity: "error"
+    page_reference: "55"
+    element_mapping:
+      ref02: "subscriber_identifier"
+      notes: "REF02 contains Member number"
+  
+  - rule_id: "BIZ_VM_015"
+    name: "Loop 2000 - REF*17 Client Reporting Category"
+    segment: "REF"
+    loop: "2000"
+    element: "REF01"
+    allowed_values: ["17"]
+    description: "Client reporting category"
+    message: "Virginia Medicaid uses REF*17 in Loop 2000"
+    severity: "info"
+    page_reference: "57"
+    element_mapping:
+      ref02: "program_designation_code"
+      notes: "REF02 contains Program designation code"
+  
+  - rule_id: "BIZ_VM_016"
+    name: "Loop 2000 - REF*3H Case Number"
+    segment: "REF"
+    loop: "2000"
+    element: "REF01"
+    allowed_values: ["3H"]
+    description: "Case Number"
+    message: "Virginia Medicaid uses REF*3H for Case Number in Loop 2000"
+    severity: "info"
+    page_reference: "57"
+    element_mapping:
+      ref02: "case_number"
+      notes: "REF02 contains Case Number"
+  
+  - rule_id: "BIZ_VM_017"
+    name: "Loop 2000 - REF*ZZ Mutually Defined (Citizenship/Review/Delivery)"
+    segment: "REF"
+    loop: "2000"
+    element: "REF01"
+    allowed_values: ["ZZ"]
+    description: "Mutually Defined"
+    message: "Virginia Medicaid uses REF*ZZ with concatenated values"
+    severity: "warning"
+    page_reference: "57-59"
+    format_validation:
+      ref02_pattern: "CZ-X CR-CCYYMMDD ED-CCYYMMDD"
+      format: "concatenated_with_spaces"
+      description: |
+        Three values sent situationally based on data availability:
+        CZ - Citizenship Status
+        CR - Case Review Date  
+        ED - Expected Delivery
+        Values concatenated with spaces between each
+        If only one value available, send that value only (e.g., REF*ZZ*CZ-A)
+    citizenship_status_values: ["A", "C", "D", "E", "I", "N", "P", "R", "V"]
+    element_mapping:
+      ref02: "citizenship_review_delivery"
+      notes: "REF02 contains CZ-X CR-CCYYMMDD ED-CCYYMMDD (concatenated with spaces)"
+  
+  # Loop 2000 Business Rules - DTP Segments
+  - rule_id: "BIZ_VM_018"
+    name: "Loop 2000 - DTP*356 Eligibility Begin Date"
+    segment: "DTP"
+    loop: "2000"
+    element: "DTP01"
+    allowed_values:
+      mco_mmp_behavioral_dental: ["356", "357"]  # Begin and End dates
+      transportation: ["300"]  # Enrollment Signature Date
+    description: "Date/Time Qualifier"
+    message: "Virginia Medicaid uses DTP*356/357 for MCOs, MMPs, Behavioral Health, and Dental Service Providers"
+    severity: "info"
+    page_reference: "59-60"
+    element_mapping:
+      dtp01_356: "eligibility_begin_date"
+      dtp01_357: "eligibility_end_date"
+      dtp01_300: "enrollment_signature_date"
+    notes: |
+      For MCOs, MMPs, Behavioral Health, and Dental Service Providers:
+      356 - Eligibility Begin Date
+      357 - Eligibility End Date
+      For Transportation Service Provider:
+      300 - Enrollment Signature Date - Benefit Plan Date
+  
+  # Loop 2100A Business Rules
+  - rule_id: "BIZ_VM_019"
+    name: "Loop 2100A - NM108 Identification Code Qualifier"
+    segment: "NM1"
+    loop: "2100A"
+    element: "NM108"
+    allowed_values:
+      transportation_behavioral_dental: ["34"]  # Social Security Number
+    message: "Virginia Medicaid Transportation, Behavioral Health, Dental Service Providers use NM108 = '34' (SSN)"
+    severity: "info"
+    page_reference: "64"
+  
+  - rule_id: "BIZ_VM_020"
+    name: "Loop 2100A - PER03 Communication Number Qualifier"
+    segment: "PER"
+    loop: "2100A"
+    element: "PER03"
+    allowed_values:
+      mco_behavioral: ["TE"]  # Telephone Number
+      transportation_dental: ["HP"]  # Home Phone Number
+    message: "Virginia Medicaid uses different PER03 qualifiers based on provider type"
+    severity: "info"
+    page_reference: "66"
+    notes: |
+      For MCOs and Behavioral Health: TE (Telephone Number)
+      For Transportation and Dental Service Providers: HP (Home Phone Number)
+  
+  - rule_id: "BIZ_VM_021"
+    name: "Loop 2100A - PER05 Communication Number Qualifier (Dental)"
+    segment: "PER"
+    loop: "2100A"
+    element: "PER05"
+    allowed_values: ["WP"]  # Work Phone Number
+    applies_to: "dental_service_provider"
+    message: "Virginia Medicaid Dental Service Providers use PER05 = 'WP' (Work Phone Number)"
+    severity: "info"
+    page_reference: "66"
+  
+  - rule_id: "BIZ_VM_022"
+    name: "Loop 2100A - N405 Location Qualifier"
+    segment: "N4"
+    loop: "2100A"
+    element: "N405"
+    required_value: "60"
+    allowed_values: ["60"]
+    description: "Area"
+    message: "Virginia Medicaid requires N405 = '60' (Area) in Loop 2100A"
+    severity: "error"
+    page_reference: "70"
+    element_mapping:
+      n405: "location_qualifier"
+  
+  - rule_id: "BIZ_VM_023"
+    name: "Loop 2100A - N406 Location Identifier"
+    segment: "N4"
+    loop: "2100A"
+    element: "N406"
+    validation: "fips_code"
+    description: "FIPS Code"
+    message: "Virginia Medicaid requires N406 = FIPS Code in Loop 2100A"
+    severity: "error"
+    page_reference: "70"
+    element_mapping:
+      n406: "fips_code"
+  
+  - rule_id: "BIZ_VM_024"
+    name: "Loop 2100A - LUI01 Identification Code Qualifier"
+    segment: "LUI"
+    loop: "2100A"
+    element: "LUI01"
+    allowed_values: ["LE"]
+    description: "ISO 639 Language Codes"
+    message: "Virginia Medicaid uses LUI01 = 'LE' (ISO 639 Language Codes)"
+    severity: "info"
+    page_reference: "84-85"
+  
+  # Loop 2300 Business Rules
+  - rule_id: "BIZ_VM_025"
+    name: "Loop 2300 - HD03 Insurance Line Code"
+    segment: "HD"
+    loop: "2300"
+    element: "HD03"
+    allowed_values:
+      mco_mmp_behavioral_dental: ["HMO"]  # Health Maintenance Organization
+      transportation: ["HLT"]  # Health
+    message: "Virginia Medicaid uses different HD03 values based on provider type"
+    severity: "info"
+    page_reference: "142"
+    notes: |
+      For MCOs, MMPs, Behavioral Health, and Dental Service Providers: HMO
+      For Transportation Service Provider: HLT
+  
+  - rule_id: "BIZ_VM_025A"
+    name: "Loop 2300 - HD04 Plan Coverage Description"
+    segment: "HD"
+    loop: "2300"
+    element: "HD04"
+    description: "Benefit plan package code"
+    message: "Virginia Medicaid uses HD04 for benefit plan package code"
+    severity: "info"
+    page_reference: "142"
+    notes: |
+      For MCOs, MMPs, Behavioral Health, and Dental Service Providers: Benefit plan package code
+      For Transportation Service Provider: Benefit plan package code (Concatenated field with a short name at the end)
+      For additional 2300 loops: Benefit plan package code (does not apply to Behavioral Health and Dental Vendor)
+  
+  - rule_id: "BIZ_VM_026"
+    name: "Loop 2300 - AMT*P3 Premium Amount"
+    segment: "AMT"
+    loop: "2300"
+    element: "AMT01"
+    allowed_values: ["P3", "C1"]
+    description: "Amount Qualifier Code"
+    message: "Virginia Medicaid uses AMT*P3 (Premium) for MCOs/MMPs, AMT*C1 (Patient Pay) for certain providers"
+    severity: "info"
+    page_reference: "147"
+    notes: |
+      AMT01=P3 - Premium amount (MCOs and MMPs)
+      AMT01=C1 - Patient Pay amount (applies to MCOs, MMPs, and Behavioral Health Service Provider)
+      Patient Pay begin/end dates sent in DTP*348 and DTP*349
+  
+  - rule_id: "BIZ_VM_027"
+    name: "Loop 2300 - REF*17 Client Reporting Category"
+    segment: "REF"
+    loop: "2300"
+    element: "REF01"
+    allowed_values:
+      mco_mmp_behavioral_dental: ["17"]  # Client reporting category
+      transportation: ["ZZ"]  # Mutually Defined
+    description: "Reference ID Qualifier"
+    message: "Virginia Medicaid uses REF*17 in Loop 2300 (except Transportation uses REF*ZZ)"
+    severity: "info"
+    page_reference: "148"
+    element_mapping:
+      ref02_mco: "aid_category"
+      ref02_transportation: "medicaid_other"
+    notes: |
+      For MCOs, MMPs, Behavioral Health, and Dental Service Providers:
+      REF01=17 - Client reporting category (Indicates Managed Care Benefit)
+      REF02 - AID Category
+      For Transportation Service Provider:
+      REF01=ZZ - Mutually Defined
+      REF02 - M (Medicaid) or O (Other)
+  
+  # Loop 2330 Business Rules (Third Party Administrator)
+  - rule_id: "BIZ_VM_027A"
+    name: "Loop 2330 - NM101 Entity ID Code"
+    segment: "NM1"
+    loop: "2330"
+    element: "NM101"
+    required_value: "IN"
+    allowed_values: ["IN"]
+    description: "Insurer"
+    message: "Virginia Medicaid requires NM101 = 'IN' (Insurer) in Loop 2330"
+    severity: "error"
+    page_reference: "169"
+  
+  - rule_id: "BIZ_VM_027B"
+    name: "Loop 2330 - NM103 Name Last or Organization Name"
+    segment: "NM1"
+    loop: "2330"
+    element: "NM103"
+    description: "TPL carrier name"
+    message: "Virginia Medicaid requires NM103 = TPL carrier name in Loop 2330"
+    severity: "info"
+    page_reference: "170"
+    element_mapping:
+      nm103: "tpl_carrier_name"
+    notes: "NM103 contains TPL carrier name. This loop can occur 3 times and provides information to a Third Party Administrator."
+  
+  - rule_id: "BIZ_VM_027C"
+    name: "Loop 2330 - N301 Address Information"
+    segment: "N3"
+    loop: "2330"
+    element: "N301"
+    description: "TPL Carrier Address Line 1"
+    message: "Virginia Medicaid requires N301 = TPL Carrier Address Line 1 in Loop 2330"
+    severity: "info"
+    page_reference: "171"
+    element_mapping:
+      n301: "tpl_carrier_address"
+  
+  - rule_id: "BIZ_VM_027D"
+    name: "Loop 2330 - N401 City Name"
+    segment: "N4"
+    loop: "2330"
+    element: "N401"
+    description: "TPL Carrier City Name"
+    message: "Virginia Medicaid requires N401 = TPL Carrier City Name in Loop 2330"
+    severity: "info"
+    page_reference: "172"
+    element_mapping:
+      n401: "tpl_carrier_city"
+  
+  - rule_id: "BIZ_VM_027E"
+    name: "Loop 2330 - N402 State or Province Code"
+    segment: "N4"
+    loop: "2330"
+    element: "N402"
+    description: "TPL Carrier State"
+    message: "Virginia Medicaid requires N402 = TPL Carrier State in Loop 2330"
+    severity: "info"
+    page_reference: "173"
+    element_mapping:
+      n402: "tpl_carrier_state"
+  
+  - rule_id: "BIZ_VM_027F"
+    name: "Loop 2330 - N403 Postal Code"
+    segment: "N4"
+    loop: "2330"
+    element: "N403"
+    description: "TPL Carrier Zipcode"
+    message: "Virginia Medicaid requires N403 = TPL Carrier Zipcode in Loop 2330"
+    severity: "info"
+    page_reference: "173"
+    element_mapping:
+      n403: "tpl_carrier_zipcode"
+  
+  - rule_id: "BIZ_VM_028"
+    name: "Loop 2300 - REF*XX1 Special Program Code"
+    segment: "REF"
+    loop: "2300"
+    element: "REF01"
+    allowed_values: ["XX1"]
+    description: "Special Program Code"
+    message: "Virginia Medicaid uses REF*XX1 for Special Program Code (CCC Plus and Medallion 4.0 MCOs)"
+    severity: "info"
+    page_reference: "146-147"
+    applies_to: "ccc_plus_medallion_4_mco"
+    element_mapping:
+      ref02: "change_source"
+    change_source_values: ["X", "XP", "XA", "XG", "86", "89", "92"]
+    notes: |
+      REF02 contains 'Change Source' value:
+      X - Screening completed, not required
+      XP - Screening required
+      XA - Screening auto-assigned
+      XG - Member is former GAP
+      86 - Ventilator
+      89 - Medically Complex
+      92 - Rehabilitation
+  
+  - rule_id: "BIZ_VM_029"
+    name: "Loop 2300 - IDC Replacement ID Card"
+    segment: "IDC"
+    loop: "2300"
+    description: "Replacement ID Card segment occurs if applicable"
+    message: "Virginia Medicaid includes IDC segment for Replacement ID Card when applicable"
+    severity: "info"
+    page_reference: "150-151"
+    element_mapping:
+      idc01: "0"
+      idc02: "H"
+      idc04: "RX"
+    notes: |
+      IDC01 = 0 (No Additional Information)
+      IDC02 = H (Health Insurance)
+      IDC04 = RX (Replacement)
+  
+  - rule_id: "BIZ_VM_029A"
+    name: "Additional Loop 2300 - REF*1L Group or Policy Number"
+    segment: "REF"
+    loop: "2300"
+    element: "REF01"
+    allowed_values: ["1L"]
+    description: "Group or Policy Number"
+    message: "Virginia Medicaid uses REF*1L in additional 2300 loops"
+    severity: "info"
+    page_reference: "146-147"
+    element_mapping:
+      ref02: "benefit_plan_code"
+    notes: |
+      REF02 contains first two characters of Benefit Plan
+      For MCOs and Transportation Vendor: Default to 00
+      For Behavioral Health and Dental Vendor: Default to 01
+  
+  # Loop 2310 Business Rules
+  - rule_id: "BIZ_VM_030"
+    name: "Loop 2310 - NM101 Entity Identifier Code"
+    segment: "NM1"
+    loop: "2310"
+    element: "NM101"
+    required_value: "P3"
+    allowed_values: ["P3"]
+    description: "Primary Care Provider Code"
+    message: "Virginia Medicaid requires NM101 = 'P3' (Primary Care Provider Code) in Loop 2310"
+    severity: "error"
+    page_reference: "154"
+  
+  - rule_id: "BIZ_VM_031"
+    name: "Loop 2310 - NM102 Entity Type Qualifier"
+    segment: "NM1"
+    loop: "2310"
+    element: "NM102"
+    required_value: "2"
+    allowed_values: ["2"]
+    description: "Non person Entity"
+    message: "Virginia Medicaid requires NM102 = '2' (Non person Entity) in Loop 2310"
+    severity: "error"
+    page_reference: "154"
+  
+  - rule_id: "BIZ_VM_032"
+    name: "Loop 2310 - NM110 Entity Relationship Code"
+    segment: "NM1"
+    loop: "2310"
+    element: "NM110"
+    allowed_values: ["25", "72"]
+    description: "Entity Relationship Code"
+    message: "Virginia Medicaid uses NM110 = '25' (default) or '72' (Medically Complex benefit)"
+    severity: "info"
+    page_reference: "155"
+    notes: |
+      NM110 = 25 - Established Patient (default for benefits like Managed Care, Waivers, EI)
+      NM110 = 72 - Unknown (value for Medically Complex benefit when HD04 is '01010100X')
+  
+  - rule_id: "BIZ_VM_032A"
+    name: "Additional Loop 2310 - NM108 Identification Code Qualifier"
+    segment: "NM1"
+    loop: "2310"
+    element: "NM108"
+    required_value: "SV"
+    allowed_values: ["SV"]
+    description: "Service Provider Number"
+    message: "Virginia Medicaid requires NM108 = 'SV' (Service Provider Number) in additional 2310 loops"
+    severity: "error"
+    page_reference: "155"
+    applies_to: "additional_loop_2300"
+  
+  - rule_id: "BIZ_VM_032B"
+    name: "Additional Loop 2310 - NM109 Identification Code"
+    segment: "NM1"
+    loop: "2310"
+    element: "NM109"
+    description: "Provider ID associated with the benefit in the 2300 loop"
+    message: "Virginia Medicaid requires NM109 = Provider ID associated with the benefit in the 2300 loop"
+    severity: "info"
+    page_reference: "155"
+    applies_to: "additional_loop_2300"
+    notes: "NM109 identifies the Provider ID associated with the benefit in the 2300 loop. For REF*XX1 Change Source 'X', NM109 identifies the MCO ID that supplied the most recent screening."
+  
+  # Loop 2320 Business Rules
+  - rule_id: "BIZ_VM_033"
+    name: "Loop 2320 - COB01 Payer Responsibility Sequence Number Code"
+    segment: "COB"
+    loop: "2320"
+    element: "COB01"
+    allowed_values:
+      mco_mmp_behavioral_transportation: ["P", "S"]  # Primary, Secondary
+      dental: ["U"]  # Unknown
+    description: "Payer Responsibility Sequence Number Code"
+    message: "Virginia Medicaid uses different COB01 values based on provider type"
+    severity: "info"
+    page_reference: "164"
+    notes: |
+      For MCOs, MMPs, Behavioral Health, and Transportation Service Provider: P (Primary), S (Secondary)
+      For Dental Service Provider: U (Unknown)
+  
+  - rule_id: "BIZ_VM_033A"
+    name: "Loop 2320 - COB02 Reference ID"
+    segment: "COB"
+    loop: "2320"
+    element: "COB02"
+    description: "TPL policy number"
+    message: "Virginia Medicaid requires COB02 = TPL policy number"
+    severity: "info"
+    page_reference: "164"
+    element_mapping:
+      cob02: "tpl_policy_number"
+  
+  - rule_id: "BIZ_VM_033B"
+    name: "Loop 2320 - COB03 COB Code"
+    segment: "COB"
+    loop: "2320"
+    element: "COB03"
+    required_value: "1"
+    allowed_values: ["1"]
+    description: "Coordination of benefits"
+    message: "Virginia Medicaid requires COB03 = '1' (Coordination of benefits)"
+    severity: "error"
+    page_reference: "164"
+  
+  - rule_id: "BIZ_VM_033C"
+    name: "Loop 2320 - COB04 Service Type Code"
+    segment: "COB"
+    loop: "2320"
+    element: "COB04"
+    allowed_values:
+      mco_mmp_transportation: ["1", "35", "48", "89", "A4", "AG", "AL"]  # Medical Care, Dental Care, Hospital Inpatient, Free Standing Prescription Drug, Psychiatric, Skilled Nursing Care, Vision
+      transportation_extended: ["50", "54"]  # Hospital Outpatient, Long Term Care Outpatient
+      dental: ["1", "35"]  # Medical Care, Dental Care
+      behavioral_health: ["1", "48", "A4"]  # Medical Care, Hospital Inpatient, Psychiatric
+    description: "Service Type Code"
+    message: "Virginia Medicaid uses different COB04 values based on provider type"
+    severity: "info"
+    page_reference: "164"
+    notes: |
+      For MCOs, MMPs, and Transportation Service Provider:
+      1 - Medical Care
+      35 - Dental Care
+      48 - Hospital Inpatient
+      89 - Free Standing Prescription Drug
+      A4 - Psychiatric
+      AG - Skilled Nursing Care
+      AL - Vision (Optometry)
+      For Transportation Service Provider (additional):
+      50 - Hospital Outpatient
+      54 - Long Term Care Outpatient
+      For Dental Service Provider:
+      1 - Medical Care
+      35 - Dental Care
+      For Behavioral Health Service Provider:
+      1 - Medical Care
+      48 - Hospital Inpatient
+      A4 - Psychiatric
+  
+  - rule_id: "BIZ_VM_033D"
+    name: "Loop 2320 - REF*60 Account Suffix Code"
+    segment: "REF"
+    loop: "2320"
+    element: "REF01"
+    allowed_values: ["60"]
+    description: "Account Suffix Code"
+    message: "Virginia Medicaid uses REF*60 in Loop 2320"
+    severity: "info"
+    page_reference: "166-167"
+    element_mapping:
+      ref02: "tpl_coverage_type"
+    notes: "REF02 contains TPL coverage type"
+  
+  - rule_id: "BIZ_VM_033E"
+    name: "Loop 2320 - REF*ZZ Mutually Defined (TPL Carrier ID)"
+    segment: "REF"
+    loop: "2320"
+    element: "REF01"
+    allowed_values: ["ZZ"]
+    description: "Mutually Defined"
+    message: "Virginia Medicaid uses REF*ZZ in Loop 2320 for TPL Carrier ID"
+    severity: "info"
+    page_reference: "166-167"
+    element_mapping:
+      ref02: "tpl_carrier_id"
+    notes: "REF02 contains TPL Carrier ID"
+  
+  - rule_id: "BIZ_VM_033F"
+    name: "Loop 2320 - DTP*344 COB Begin Date"
+    segment: "DTP"
+    loop: "2320"
+    element: "DTP01"
+    allowed_values: ["344"]
+    description: "COB Begin Date"
+    message: "Virginia Medicaid uses DTP*344 for COB Begin Date in Loop 2320"
+    severity: "info"
+    page_reference: "168"
+    element_mapping:
+      dtp03: "tpl_begin_date"
+    notes: "DTP03 contains TPL Begin Date"
+  
+  - rule_id: "BIZ_VM_033G"
+    name: "Loop 2320 - DTP*345 COB End Date"
+    segment: "DTP"
+    loop: "2320"
+    element: "DTP01"
+    allowed_values: ["345"]
+    description: "COB End Date"
+    message: "Virginia Medicaid uses DTP*345 for COB End Date in Loop 2320"
+    severity: "info"
+    page_reference: "168"
+    element_mapping:
+      dtp03: "tpl_end_date"
+    notes: "DTP03 contains TPL End Date"
+  
+  # Loop 2700 Business Rules (MAC ID Reporting)
+  - rule_id: "BIZ_VM_034"
+    name: "Loop 2700 - LS/LE Boundaries Required"
+    loop: "2700"
+    description: "LS/LE boundaries required for Loop 2700"
+    ls_le_required: true
+    ls_le_loop_id: "2700"
+    message: "Virginia Medicaid requires LS/LE boundaries for Loop 2700 (MAC ID reporting)"
+    severity: "error"
+    page_reference: "176, 183"
+    applies_to: "ccc_plus_npi"
+    notes: "Used for CCC Plus NPIs to identify Member's Medicare Administrative Contractor ID (MAC ID)"
+  
+  - rule_id: "BIZ_VM_035"
+    name: "Loop 2700 - LS01 Loop Identifier Code"
+    segment: "LS"
+    loop: "2700"
+    element: "LS01"
+    required_value: "2700"
+    allowed_values: ["2700"]
+    message: "Virginia Medicaid requires LS01 = '2700' for Loop Header"
+    severity: "error"
+    page_reference: "176"
+  
+  - rule_id: "BIZ_VM_036"
+    name: "Loop 2750 - N101 Entity Identifier Code"
+    segment: "N1"
+    loop: "2750"
+    element: "N101"
+    required_value: "75"
+    allowed_values: ["75"]
+    description: "Participant"
+    message: "Virginia Medicaid requires N101 = '75' (Participant) in Loop 2750"
+    severity: "error"
+    page_reference: "178"
+  
+  - rule_id: "BIZ_VM_037"
+    name: "Loop 2750 - N102 Member Reporting Category Name"
+    segment: "N1"
+    loop: "2750"
+    element: "N102"
+    description: "Member Reporting Category Name"
+    message: "Virginia Medicaid requires N102 = Member Reporting Category Name in Loop 2750"
+    severity: "info"
+    page_reference: "178"
+    example: "Member Associated DSNP"
+  
+  - rule_id: "BIZ_VM_038"
+    name: "Loop 2750 - REF*ZZ MAC ID"
+    segment: "REF"
+    loop: "2750"
+    element: "REF01"
+    required_value: "ZZ"
+    allowed_values: ["ZZ"]
+    description: "Mutually Defined"
+    message: "Virginia Medicaid requires REF*ZZ in Loop 2750"
+    severity: "error"
+    page_reference: "179"
+    element_mapping:
+      ref02: "mac_id"
+    notes: "REF02 contains Alphanumeric MAC ID (DE 9064)"
+  
+  - rule_id: "BIZ_VM_039"
+    name: "Loop 2750 - DTP*007 Effective Date"
+    segment: "DTP"
+    loop: "2750"
+    element: "DTP01"
+    required_value: "007"
+    allowed_values: ["007"]
+    description: "Effective Date"
+    message: "Virginia Medicaid requires DTP*007 in Loop 2750"
+    severity: "error"
+    page_reference: "181"
+    element_mapping:
+      dtp02: "D8"
+      dtp03: "effective_date"
+    notes: "DTP02 = 'D8' (CCYYMMDD format), DTP03 = Effective date of the month"
+  
+  - rule_id: "BIZ_VM_040"
+    name: "Loop 2700 - LE01 Loop Identifier Code"
+    segment: "LE"
+    loop: "2700"
+    element: "LE01"
+    required_value: "2700"
+    allowed_values: ["2700"]
+    message: "Virginia Medicaid requires LE01 = '2700' for Loop Trailer"
+    severity: "error"
+    page_reference: "183"
+
+# Additional Loop 2300 Business Rules (Additional Benefits)
+additional_loop_2300:
+  - rule_id: "BIZ_VM_041"
+    name: "Additional Loop 2300 - HD01 Maintenance Type Code"
+    segment: "HD"
+    loop: "2300"
+    element: "HD01"
+    allowed_values:
+      behavioral_dental: ["021", "024", "030"]  # Adds, Cancel, Audits
+      transportation: ["021", "030"]  # Adds, Audits
+    description: "Maintenance type code for additional 2300 loops"
+    message: "Virginia Medicaid uses HD01 for additional benefit segments (can occur up to 40 times)"
+    severity: "info"
+    page_reference: "140-147"
+    notes: |
+      For Behavioral Health and Dental Vendor: 021 (Adds), 024 (Cancel), 030 (Audits)
+      For Transportation Service Provider: 021 (Adds), 030 (Audits)
+  
+  - rule_id: "BIZ_VM_042"
+    name: "Additional Loop 2300 - DTP*348/349 Patient Pay Dates"
+    segment: "DTP"
+    loop: "2300"
+    element: "DTP01"
+    allowed_values: ["348", "349"]
+    description: "Patient Pay Begin/End Dates"
+    message: "Virginia Medicaid uses DTP*348/349 for Patient Pay dates (MCOs, MMPs, Behavioral Health)"
+    severity: "info"
+    page_reference: "143-144"
+    element_mapping:
+      dtp01_348: "patient_pay_begin_date"
+      dtp01_349: "patient_pay_end_date"
+    notes: |
+      DTP01=348 - Enrollment begin date
+      DTP01=349 - Enrollment end date
+      These segments can be ignored if not needed
+
+# Validation Severity Overrides
+validation_overrides:
+  - rule_id: "TSL_001"  # ST02/SE02 matching
+    mode: "warning"
+    condition:
+      field: "ISA15"
+      operator: "equals"
+      value: "T"  # Test mode
+    message: "Virginia Medicaid allows warnings for ST/SE control number mismatches in test mode"
+    page_reference: "Validation overrides section"
+  
+  - rule_id: "TSL_002"  # SE01 segment count validation
+    mode: "warning"
+    description: "SE01 segment count mismatch is treated as warning for Virginia Medicaid (client customization)"
+    message: "Virginia Medicaid allows SE01 segment count mismatches as warnings (client customization)"
+    page_reference: "File-level validation overrides"
+    notes: "SE01 segment count validation errors are downgraded to warnings for Virginia Medicaid files"
+
+# File Processing Notes
+processing_notes: |
+  Virginia Medicaid File Processing Notes:
+  - 834 transaction is used to provide member rosters
+  - Managed Care subsystem generates an 834 file mid-month for each MCO after assignment runs
+  - CCCPlus and Medallion 4.0 plans receive two weekly files (6th and 13th of month) containing changes
+  - Month end file contains prospective capitation payment per member and remittance date
+  - Behavioral Health and Dental Service vendors receive daily 834 benefit enrollment file + monthly file
+  - NEMT broker receives weekly and monthly 834 file
+  - Multiple 2300 loops may be written out as necessary to reflect member enrollment segments
+  - These segments are only present for Add (type 021) and Audit (type 030) records
+  - Additional segments can be easily ignored if not needed

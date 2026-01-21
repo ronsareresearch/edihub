@@ -1,0 +1,100 @@
+version: '1.0'
+description: File-level validation rules for EDI 834
+
+# File-level validations check:
+# - EDI file structure and envelope integrity (ISA, GS, ST, SE, GE, IEA)
+# - Control number matching between header/trailer segments
+# - Required segment presence
+# - Segment counts
+# - File format (delimiters, structure)
+#
+# Note: Field-level validations (data types, qualifiers, formats) are in field_level.yaml
+# Note: Business rules (client-specific data requirements) are in client business rules files
+
+# Control Segments Level
+# Validates presence and integrity of control segments (ISA, GS, GE, IEA, ST, SE)
+control_segments_level:
+- rule_id: CSL_001
+  name: Required Control Segments
+  type: required_control_segments
+  level: control_segments
+  priority: 1
+  message: "All control segments marked with usage: ['R'] must be present in the EDI file"
+  severity: error
+  required: true
+  source: base_edi834_config.yaml
+- rule_id: CSL_002
+  name: Interchange Control Number Match
+  type: must_match
+  level: control_segments
+  priority: 2
+  segments:
+  - segment: ISA
+    element: ISA13
+  - segment: IEA
+    element: IEA02
+  message: ISA13 must match IEA02
+  severity: error
+  required: true
+- rule_id: CSL_003
+  name: Group Control Number Match
+  type: must_match
+  level: control_segments
+  priority: 3
+  segments:
+  - segment: GS
+    element: GS06
+  - segment: GE
+    element: GE02
+  message: GS06 must match GE02
+  severity: error
+  required: true
+# Transaction Set Level
+# Validates transaction set structure, control numbers, and segment counts
+transaction_set_level:
+- rule_id: TSL_000
+  name: Required Transaction Set Segments
+  type: required_transaction_segments
+  level: transaction_set
+  priority: 1
+  message: "All transaction set segments marked with usage: ['R'] must be present in the EDI file"
+  severity: error
+  required: true
+  source: loop_transactional.yaml
+- rule_id: TSL_001
+  name: Transaction Set Control Number Match
+  type: must_match
+  level: transaction_set
+  segments:
+  - segment: ST
+    element: ST02
+  - segment: SE
+    element: SE02
+  message: ST02 must match SE02
+  severity: error
+  required: true
+- rule_id: TSL_002
+  name: Transaction Set Segment Count
+  type: segment_count
+  level: transaction_set
+  segment: SE
+  element: SE01
+  message: SE01 must equal the actual count of segments between ST and SE (including ST and SE)
+  severity: error
+  required: true
+  calculation: count_all_segments_including_st_se
+# File Format Level
+# Validates file format requirements (delimiters, character sets, etc.)
+file_format:
+- rule_id: FF_001
+  name: Component Element Separator Validation
+  type: format_validation
+  level: file
+  segment: ISA
+  element: ISA16
+  validation: delimiter_uniqueness
+  message: ISA16 Component Element Separator must be different from data element separator (ISA*03) and segment terminator
+  severity: error
+  required: true
+  note: According to EDI 834 guide, ISA16 can be any character that differs from element separator and segment terminator. Client-specific values (e.g., '>' for Virginia Medicaid) should be in client business rules.
+client_overrides: {}

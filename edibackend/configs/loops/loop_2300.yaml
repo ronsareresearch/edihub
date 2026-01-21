@@ -1,0 +1,454 @@
+- loop_id: 2300
+  name: health coverage
+  segments:
+  - segment_code: HD
+    name: health coverage
+    position: 2600
+    usage:
+    - S
+    repeat: 1
+    max_elements: 11
+    elements:
+    - ref_designator: HD01
+      name: maintenance type code
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 1
+      - 2
+      - 17
+      - 20
+      - 21
+      - 22
+      - 24
+      - 26
+      data_element: 875
+      notes: 'Code identifying the specific type of item maintenance (For eg) : 001- Change, 002- Delete, 021- Addition, 024- Cancellation or Termination'
+    - ref_designator: HD02
+      name: maintain reason code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 2
+      data_element: 1203
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HD03
+      name: insurance line code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 3
+      qualifier:
+      - AG
+      - AH
+      - AJ
+      - AK
+      - DCP
+      - DEN
+      - EPO
+      - FAC
+      - HE
+      - HLT
+      - HMO
+      - LTC
+      - LTD
+      - MM
+      - MOD
+      - PDG
+      - POS
+      - PPO
+      - PRA
+      - STD
+      - UR
+      - VIS
+      data_element: 1205
+      notes: 'Code identifying a group of insurance products (For eg) : AG- Preventative Care/Wellness, AH- 24 Hour Care, AJ- Medicare Risk, AK- Mental Health'
+    - ref_designator: HD04
+      name: plan cvrg description
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - O
+      order: 4
+      data_element: 1204
+      notes: A description or number that identifies the plan or coverage
+    - ref_designator: HD05
+      name: coverage level code
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - O
+      order: 5
+      data_element: 1207
+      qualifier:
+      - CHD
+      - DEP
+      - E1D
+      - E2D
+      - E3D
+      - E5D
+      - E6D
+      - E7D
+      - E8D
+      - E9D
+      - ECH
+      - EMP
+      - ESP
+      - FAM
+      - IND
+      - SPC
+      - SPO
+      - TWO
+      notes: 'Code indicating the level of coverage being provided for this insured (For eg) : CHD- Children Only, DEP- Dependents Only, E1D- Employee and One Dependent, E2D- Employee and Two Dependents'
+    - ref_designator: HD06
+      name: count
+      data_type: N
+      min_length: 1
+      max_length: 9
+      usage:
+      - O
+      order: 6
+      data_element: 609
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HD07
+      name: count
+      data_type: N
+      min_length: 1
+      max_length: 9
+      usage:
+      - O
+      order: 7
+      data_element: 609
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HD08
+      name: underwrite decide code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 8
+      data_element: 1209
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HD09
+      name: yes/no cond resp code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 9
+      data_element: 1073
+      qualifier:
+      - N
+      - Y
+      notes: 'Code indicating a Yes or No condition or response (For eg) : N- No, Y- Yes'
+    - ref_designator: HD10
+      name: drug house code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 10
+      data_element: 1211
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HD11
+      name: yes/no cond resp code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 11
+      data_element: 1073
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: DTP
+    name: health coverage dates
+    position: 2700
+    usage:
+    - R
+    repeat: 6
+    max_elements: 3
+    elements:
+    - ref_designator: DTP01
+      name: date/time qualifier
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 300
+      - 303
+      - 343
+      - 348
+      - 349
+      - 543
+      - 695
+      data_element: 374
+      notes: 'Code specifying type of date or time, or both date and time (For eg) : 300- Enrollment Signature Date, 303- Maintenance Effective, 343- Premium Paid to Date End, 348- Benefit Begin'
+    - ref_designator: DTP02
+      name: date time format qual
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D8
+      - RD8
+      data_element: 1250
+      notes: 'Code indicating the date format, time format, or date and time format (For eg) : D8- Date Expressed in Format CCYYMMDD, RD8- Range of Dates Expressed in Format CCYYMMDDCCYYMMDD'
+    - ref_designator: DTP03
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 3
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times
+  - segment_code: AMT
+    name: health coverage policy
+    position: 2800
+    usage:
+    - S
+    repeat: 9
+    max_elements: 3
+    elements:
+    - ref_designator: AMT01
+      name: amount qual code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - B9
+      - C1
+      - D2
+      - EBA
+      - FK
+      - P3
+      - R
+      data_element: 522
+      notes: 'Code to qualify amount (For eg) : B9- Co-insurance - Actual, C1- Co-Payment Amount, D2- Deductible Amount, EBA- Expected Expenditure Amount'
+    - ref_designator: AMT02
+      name: monetary amount
+      data_type: R
+      min_length: 1
+      max_length: 18
+      usage:
+      - M
+      order: 2
+      data_element: 782
+      notes: Monetary amount
+    - ref_designator: AMT03
+      name: cred/debit flag code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      data_element: 478
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: REF
+    name: health coverage policy number
+    position: 2900
+    usage:
+    - S
+    repeat: 14
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference ident qual
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 17
+      - 1L
+      - 9V
+      - CE
+      - E8
+      - M7
+      - PID
+      - RB
+      - X9
+      - XM
+      - XX1
+      - XX2
+      - ZX
+      - ZZ
+      data_element: 128
+      notes: 'Code qualifying the Reference Identification (For eg) : 17- Client Reporting Category, 1L- Group or Policy Number, 9V- Payment Category, CE- Class of Contract Code'
+    - ref_designator: REF02
+      name: reference ident
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier. If 'Reference Ident Qual' is present, then 'Reference Ident' is required
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: REF
+    name: prior coverage months
+    position: 2900
+    usage:
+    - S
+    repeat: 1
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference ident qual
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - QQ
+      data_element: 128
+      notes: 'Code qualifying the Reference Identification (For eg) : QQ- Unit Number'
+    - ref_designator: REF02
+      name: reference ident
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier. If 'Reference Ident Qual' is present, then 'Reference Ident' is required
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: IDC
+    name: identification card
+    position: 3000
+    usage:
+    - S
+    repeat: 3
+    max_elements: 4
+    elements:
+    - ref_designator: IDC01
+      name: plan cvrg description
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - M
+      order: 1
+      data_element: 1204
+      notes: A description or number that identifies the plan or coverage
+    - ref_designator: IDC02
+      name: id card type code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D
+      - H
+      - P
+      data_element: 1215
+      notes: 'Code identifying the type of identification card (For eg) : D- Dental Insurance, H- Health Insurance, P- Prescription Drug Service Drug Insurance'
+    - ref_designator: IDC03
+      name: quantity
+      data_type: R
+      min_length: 1
+      max_length: 15
+      usage:
+      - O
+      order: 3
+      data_element: 380
+      notes: Numeric value of quantity
+    - ref_designator: IDC04
+      name: action code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - 1
+      - 2
+      - RX
+      data_element: 306
+      notes: 'Code indicating type of action (For eg) : 1- Add, 2- Change (Update), RX- Replace'

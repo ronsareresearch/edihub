@@ -1,0 +1,645 @@
+- loop_id: 2000
+  name: member level detail
+  segments:
+  - segment_code: INS
+    name: member level detail
+    position: 64
+    usage:
+    - R
+    repeat: 1
+    max_elements: 20
+    syntax:
+    - P1112
+    elements:
+    - ref_designator: INS01
+      name: yes/no condition or response code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - N
+      - Y
+      data_element: 1073
+      notes: Code indicating a Yes or No condition or response. N = No, Y = Yes
+    - ref_designator: INS02
+      name: individual relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - 1
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 08
+      - 09
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 23
+      - 24
+      - 25
+      - 26
+      - 31
+      - 38
+      - 53
+      - 60
+      - D2
+      - G8
+      - G9
+      data_element: 1069
+      notes: Code indicating the relationship between two individuals or entities
+    - ref_designator: INS03
+      name: maintenance type code
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - O
+      order: 3
+      qualifier:
+      - 1
+      - 17
+      - 20
+      - 21
+      - 24
+      data_element: 875
+      notes: Code identifying the specific type of item maintenance. 001 = Change, 021 = Addition, 024 = Cancellation or Termination, 025 = Reinstatement, 030 = Audit or Compare
+    - ref_designator: INS04
+      name: maintenance reason code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 08
+      - 09
+      - 10
+      - 11
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 20
+      - 21
+      - 22
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 31
+      - 32
+      - 33
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 43
+      - 59
+      - AA
+      - AB
+      - AC
+      - AD
+      - AE
+      - AF
+      - AG
+      - AH
+      - AI
+      - AJ
+      - AL
+      - EC
+      - XN
+      - XT
+      data_element: 1203
+      notes: Code identifying the reason for the maintenance change
+    - ref_designator: INS05
+      name: benefit status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 5
+      qualifier:
+      - A
+      - C
+      - S
+      - T
+      data_element: 1216
+      notes: The type of coverage under which benefits are paid. A = Active, C = Consolidated Omnibus Budget Reconciliation Act (COBRA), S = Surviving Insured, T = Tax Equity and Fiscal Responsibility Act (TEFRA)
+    - ref_designator: INS06
+      name: medicare status code
+      data_type: COMPOSITE
+      usage:
+      - O
+      order: 6
+      data_element: C052
+      notes: Composite element for Medicare Status. If INS06 is populated (any sub-element present), then INS06-1 is required.
+    - ref_designator: INS06-1
+      name: medicare plan code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - A
+      - B
+      - C
+      - D
+      - E
+      data_element: 1218
+      parent_composite: INS06
+      notes: Code identifying the Medicare Plan. A = Medicare Part A, B = Medicare Part B, C = Medicare Part A and B, D = Medicare Part D, E = Medicare Part A, B and D. REQUIRED if INS06 is present.
+    - ref_designator: INS06-2
+      name: eligibility reason code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 2
+      qualifier:
+      - 0
+      - 1
+      - 2
+      data_element: 1701
+      parent_composite: INS06
+      notes: Code specifying reason for eligibility. 0 = Age, 1 = Disability, 2 = End Stage Renal Disease (ESRD)
+    - ref_designator: INS06-3
+      name: eligibility reason code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      data_element: 1701
+      parent_composite: INS06
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: INS06-4
+      name: eligibility reason code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      data_element: 1701
+      parent_composite: INS06
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: INS07
+      name: consolidated omnibus budget reconciliation act (cobra) qualifying event code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 7
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - ZZ
+      data_element: 1219
+      notes: A Qualifying Event is any of the following which results in loss of coverage for a Qualified Beneficiary
+    - ref_designator: INS08
+      name: employment status code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - O
+      order: 8
+      qualifier:
+      - AC
+      - AO
+      - AU
+      - FT
+      - L1
+      - PT
+      - RT
+      - TE
+      data_element: 584
+      notes: Code showing the general employment status of an employee/claimant
+    - ref_designator: INS09
+      name: student status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 9
+      qualifier:
+      - F
+      - N
+      - P
+      data_element: 1220
+      notes: Code indicating the student status of the patient if 19 years of age or older, not handicapped and not the insured. F = Full-time, N = Not a Student, P = Part-time
+    - ref_designator: INS10
+      name: yes/no condition or response code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 10
+      qualifier:
+      - N
+      - Y
+      data_element: 1073
+      notes: Code indicating a Yes or No condition or response. Handicap Indicator. N = No, Y = Yes
+    - ref_designator: INS11
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 11
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD. If 'Date time period' is present, then 'Date Time Format Qual' is required
+    - ref_designator: INS12
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - X
+      order: 12
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times. Member Individual Death Date. If 'Date Time Format Qual' is present, then 'Date time period' is required
+    - ref_designator: INS13
+      name: confidentiality code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 13
+      qualifier:
+      - R
+      - U
+      data_element: 1165
+      notes: Code indicating the access to insured information. R = Restricted Access, U = Unrestricted Access
+    - ref_designator: INS14
+      name: city name
+      data_type: AN
+      min_length: 2
+      max_length: 30
+      usage:
+      - O
+      order: 14
+      data_element: 19
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: INS15
+      name: state or province code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - O
+      order: 15
+      data_element: 156
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: INS16
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 16
+      data_element: 26
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: INS17
+      name: number
+      data_type: N0
+      min_length: 1
+      max_length: 9
+      usage:
+      - O
+      order: 17
+      data_element: 1470
+      notes: Birth Sequence Number. The number assigned to each family member born with the same birth date. This number identifies birth sequence for multiple births allowing proper tracking and response of benefits for each dependent (i.e., twins, triplets, etc.)
+  - segment_code: REF
+    name: subscriber identifier
+    position: 128
+    usage:
+    - R
+    repeat: 1
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference identification qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 0F
+      data_element: 128
+      notes: Code qualifying the Reference Identification. 0F = Subscriber Number. The assignment of the Subscriber Number is designated within the Insurance Contract
+    - ref_designator: REF02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Subscriber Identifier. Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: AN
+      min_length: 0
+      max_length: 0
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: REF
+    name: member policy number
+    position: 128
+    usage:
+    - S
+    repeat: 1
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference identification qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 1L
+      data_element: 128
+      notes: Code qualifying the Reference Identification. 1L = Group or Policy Number
+    - ref_designator: REF02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Member Group or Policy Number. Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: AN
+      min_length: 0
+      max_length: 0
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: REF
+    name: member supplemental identifier
+    position: 128
+    usage:
+    - S
+    repeat: 13
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference identification qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 17
+      - 23
+      - 3H
+      - 4A
+      - 6O
+      - ABB
+      - D3
+      - DX
+      - F6
+      - P5
+      - Q4
+      - QQ
+      - ZZ
+      data_element: 128
+      notes: Code qualifying the Reference Identification. 17 = Client Reporting Category, 23 = Client Number, 3H = Case Number, 4A = Personal Identification Number (PIN), 6O = Plan Number, ABB = Subscriber Supplemental Identifier, D3 = National Association of Insurance Commissioners (NAIC) Identification, DX = Diagnosis Code, F6 = Health Insurance Claim Number, P5 = Plan Sponsor, Q4 = Prior Identifier Number, QQ = Member Supplemental Identifier, ZZ = Mutually Defined
+    - ref_designator: REF02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: AN
+      min_length: 0
+      max_length: 0
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: DTP
+    name: member level dates
+    position: 168
+    usage:
+    - S
+    repeat: 24
+    max_elements: 3
+    elements:
+    - ref_designator: DTP01
+      name: date/time qualifier
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 40
+      - 286
+      - 296
+      - 297
+      - 300
+      - 301
+      - 303
+      - 336
+      - 337
+      - 338
+      - 339
+      - 340
+      - 341
+      - 350
+      - 351
+      - 356
+      - 357
+      - 383
+      - 385
+      - 386
+      - 393
+      - 394
+      - 473
+      - 474
+      data_element: 374
+      notes: Code specifying type of date or time, or both date and time
+    - ref_designator: DTP02
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD
+    - ref_designator: DTP03
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 3
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times
+  - segment_code: LS
+    name: additional reporting categories
+    position: 6880
+    usage:
+    - S
+    repeat: 1
+    max_elements: 1
+    elements:
+    - ref_designator: LS01
+      name: loop identifier code
+      data_type: AN
+      min_length: 1
+      max_length: 4
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 2700
+      data_element: 447
+      notes: The loop ID number given on the transaction set diagram is the value for this data element in segments LS and LE. Use the value 2700
+  - segment_code: LE
+    name: additional reporting categories loop termination
+    position: 6885
+    usage:
+    - S
+    repeat: 1
+    max_elements: 1
+    elements:
+    - ref_designator: LE01
+      name: loop identifier code
+      data_type: AN
+      min_length: 1
+      max_length: 4
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 2700
+      data_element: 447
+      notes: The loop ID number given on the transaction set diagram is the value for this data element in segments LS and LE. Use the value 2700

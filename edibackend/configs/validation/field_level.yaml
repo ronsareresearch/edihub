@@ -1,0 +1,88 @@
+version: '1.0'
+description: Field-level validation rules for EDI 834 
+
+# Required Segment Validation Rules
+# Segments marked with usage: ['R'] must be present in the EDI file
+required_segment_rules:
+- rule_id: REQ_SEG_001
+  name: Required Segment Presence
+  type: required_segment
+  level: segment
+  severity: error
+  message: Required segment is missing from the EDI file
+  description: "Segments marked with usage: ['R'] must be present in the EDI file"
+
+# Data Type Validation Rules
+# Data type validation failures are warnings (not errors)
+data_type_rules:
+- rule_id: DT_001
+  name: R Data Type - Decimal
+  type: data_type_validation
+  data_type: R
+  validation: numeric_decimal
+  message: R data type must be a valid decimal
+  severity: warning
+  expressions:
+  - expression: 0-9.
+    description: Decimal
+- rule_id: DT_002
+  name: ID Data Type - Identifier
+  type: data_type_validation
+  data_type: ID
+  validation: qualifier_list
+  message: ID data type must be a valid identifier
+  severity: warning
+  expressions:
+  - expression: 0-9a-zA-Z
+    description: Identifier
+- rule_id: DT_003
+  name: AN Data Type - String
+  type: data_type_validation
+  data_type: AN
+  validation: character_set
+  message: AN data type must be a valid string
+  severity: warning
+  expressions:
+  - expression: A-Z\s0-9!"&''()+*,-./:;?=
+    description: Basic Character Set
+  - expression: a-z%~@\[\]_#{}\\|<>^`$
+    description: Extended Character Set
+  - expression: A-Z\s0-9!"&''()+*,-./:;?=a-z%~@\[\]_#{}\\|<>^`$
+    description: Basic and Extended character sets
+- rule_id: DT_004
+  name: DT Data Type - Date
+  type: data_type_validation
+  data_type: DT
+  validation: date_format
+  message: DT data type must be a valid date
+  severity: warning
+  expressions:
+  - expression: 0-9
+    description: Date
+- rule_id: DT_005
+  name: TM Data Type - Time
+  type: data_type_validation
+  data_type: TM
+  validation: time_format
+  message: TM data type must be a valid time
+  severity: warning
+  expressions:
+  - expression: 0-9
+    description: Time
+- rule_id: DT_006
+  name: B Data Type - Binary
+  type: data_type_validation
+  data_type: B
+  validation: binary
+  message: B data type must be a valid binary
+  severity: warning
+- rule_id: DT_007
+  name: N Data Type - Numeric
+  type: data_type_validation
+  data_type: N
+  validation: numeric
+  message: N data type must be a valid numeric
+  severity: warning
+  expressions:
+  - expression: 0-9
+    description: Numeric

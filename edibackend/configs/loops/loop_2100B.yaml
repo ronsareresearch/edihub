@@ -1,0 +1,346 @@
+- loop_id: 2100b
+  name: incorrect member name
+  segments:
+  - segment_code: NM1
+    name: incorrect member name
+    position: 192
+    usage:
+    - S
+    repeat: 1
+    max_elements: 12
+    syntax:
+    - P0809
+    - C1110
+    - C1203
+    elements:
+    - ref_designator: NM101
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 70
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. 70 = Prior Incorrect Insured
+    - ref_designator: NM102
+      name: entity type qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - 1
+      data_element: 1065
+      notes: Code qualifying the type of entity. 1 = Person
+    - ref_designator: NM103
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 3
+      data_element: 1035
+      notes: Individual last name or organizational name
+    - ref_designator: NM104
+      name: name first
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - O
+      order: 4
+      data_element: 1036
+      notes: Individual first name. Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM105
+      name: name middle
+      data_type: AN
+      min_length: 1
+      max_length: 25
+      usage:
+      - O
+      order: 5
+      data_element: 1037
+      notes: Individual middle name or initial. Required if supplied by member
+    - ref_designator: NM106
+      name: name prefix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 6
+      data_element: 1038
+      notes: Prefix to individual name. Required if supplied by member
+    - ref_designator: NM107
+      name: name suffix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 7
+      data_element: 1039
+      notes: Suffix to individual name. Required if supplied by member
+    - ref_designator: NM108
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 8
+      qualifier:
+      - 34
+      - ZZ
+      data_element: 66
+      notes: Code designating the system/method of code structure used for Identification Code. 34 = Social Security Number, ZZ = Mutually Defined. Required when a value is being reported in the NM109 element
+    - ref_designator: NM109
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 9
+      data_element: 67
+      notes: Code identifying a party or other code. Required when a Member Identifier is known and allowed under confidentiality regulations
+    - ref_designator: NM110
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 10
+      data_element: 706
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM111
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 11
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM112
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 12
+      data_element: 1035
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: DMG
+    name: incorrect member demographics
+    position: 0800
+    usage:
+    - S
+    repeat: 1
+    max_elements: 13
+    syntax:
+    - P0102
+    - P1011
+    - C1105
+    elements:
+    - ref_designator: DMG01
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 1
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD. If 'Date time period' is present, then 'Date Time Format Qual' is required
+    - ref_designator: DMG02
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - X
+      order: 2
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times. If 'Date Time Format Qual' is present, then 'Date time period' is required
+    - ref_designator: DMG03
+      name: gender code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      qualifier:
+      - F
+      - M
+      - U
+      data_element: 1068
+      notes: Code indicating the sex of the individual. F = Female, M = Male, U = Unknown
+    - ref_designator: DMG04
+      name: marital status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - B
+      - D
+      - I
+      - M
+      - R
+      - S
+      - U
+      - W
+      - X
+      data_element: 1067
+      notes: Code defining the marital status of a person
+    - ref_designator: DMG05
+      name: composite race or ethnicity information
+      data_type: COMPOSITE
+      usage:
+      - X
+      order: 5
+      data_element: C056
+      notes: Composite element for Race or Ethnicity Information. Race or Ethnicity information is reported in either DMG05-1 or DMG05-2 and DMG05-3. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG05-1
+      name: race or ethnicity code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 1
+      qualifier:
+      - 7
+      - 8
+      - A
+      - B
+      - C
+      - D
+      - E
+      - F
+      - G
+      - H
+      - I
+      - J
+      - N
+      - O
+      - P
+      - Z
+      data_element: 1109
+      parent_composite: DMG05
+      notes: Code indicating the racial or ethnic background of a person. 7 = Not Provided, 8 = Not Applicable, A = Asian or Pacific Islander, B = Black
+    - ref_designator: DMG05-2
+      name: code list qualifier code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 2
+      qualifier:
+      - RET
+      data_element: 1270
+      parent_composite: DMG05
+      notes: Code identifying a specific industry code list. RET = Classification of Race or Ethnicity. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG05-3
+      name: industry code
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - X
+      order: 3
+      data_element: 1271
+      parent_composite: DMG05
+      notes: Code indicating a code from a specific industry code list. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG06
+      name: citizenship status code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 6
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      data_element: 1066
+      notes: Code indicating citizenship status
+    - ref_designator: DMG07
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 7
+      data_element: 26
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG08
+      name: basis of verification code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 8
+      data_element: 659
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG09
+      name: quantity
+      data_type: R
+      min_length: 1
+      max_length: 15
+      usage:
+      - O
+      order: 9
+      data_element: 380
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG10
+      name: code list qualifier code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 10
+      qualifier:
+      - REC
+      data_element: 1270
+      notes: Code identifying a specific industry code list. REC = Race or Ethnicity Collection Code. If 'Industry Code' is present, then 'Code List Qualifier Code' is required
+    - ref_designator: DMG11
+      name: industry code
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - X
+      order: 11
+      data_element: 1271
+      notes: Code indicating a code from a specific industry code list. If 'Code List Qualifier Code' is present, then 'Industry Code' is required

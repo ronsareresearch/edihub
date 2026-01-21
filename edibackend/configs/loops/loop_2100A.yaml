@@ -1,0 +1,1016 @@
+- loop_id: 2100a
+  name: member name
+  segments:
+  - segment_code: NM1
+    name: member name
+    position: 192
+    usage:
+    - R
+    repeat: 1
+    max_elements: 12
+    syntax:
+    - P0809
+    - C1110
+    - C1203
+    elements:
+    - ref_designator: NM101
+      name: entity id code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 74
+      - IL
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. 74 = Corrected Insured, IL = Insured or Subscriber
+    - ref_designator: NM102
+      name: entity type qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      data_element: 1065
+      order: 2
+      qualifier:
+      - 1
+      notes: Code qualifying the type of entity. 1 = Person
+    - ref_designator: NM103
+      name: name last/org name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 3
+      data_element: 1035
+      notes: Individual last name or organizational name. Member Last Name
+    - ref_designator: NM104
+      name: name first
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - O
+      data_element: 1036
+      order: 4
+      notes: Individual first name.Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM105
+      name: name middle
+      data_type: AN
+      min_length: 1
+      max_length: 25
+      usage:
+      - O
+      order: 5
+      data_element: 1037
+      notes: Individual middle name or initial. Member Middle Name. Required if supplied by member
+    - ref_designator: NM106
+      name: name prefix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 6
+      data_element: 1038
+      notes: Prefix to individual name. Member Name Prefix. Required if supplied by member
+    - ref_designator: NM107
+      name: name suffix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 7
+      data_element: 1039
+      notes: Suffix to individual name. Member Name Suffix. Required if supplied by member
+    - ref_designator: NM108
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      data_element: 66
+      order: 8
+      qualifier:
+      - 34
+      - ZZ
+      notes: Code designating the system/method of code structure used for Identification Code. 34 = Social Security Number, ZZ = Mutually Defined. Required when a value is being reported in the NM109 element. If 'ID Code Qualifier' is present, then 'ID Code' is required
+    - ref_designator: NM109
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 9
+      data_element: 67
+      notes: Code identifying a party or other code. Member Identifier. Required when a Member Identifier is known and allowed under confidentiality regulations. If 'ID Code Qualifier' is present, then 'ID Code' is required
+    - ref_designator: NM110
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 10
+      data_element: 706
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM111
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 11
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM112
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 12
+      data_element: 1035
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: PER
+    name: member communications numbers
+    position: 256
+    usage:
+    - S
+    repeat: 1
+    max_elements: 9
+    syntax:
+    - P0304
+    - P0506
+    - P0708
+    elements:
+    - ref_designator: PER01
+      name: contact funct code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - IP
+      data_element: 366
+      notes: Code identifying the major duty or responsibility of the person or group named. IP = Insured Party
+    - ref_designator: PER02
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 2
+      data_element: 93
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: PER03
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      data_element: 365
+      order: 3
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER04 element. If 'Comm number' is present, then 'Comm Number Qual' is required
+    - ref_designator: PER04
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 4
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. If 'Comm Number Qual' is present, then 'Comm number' is required
+    - ref_designator: PER05
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      data_element: 365
+      order: 5
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER06 element. If 'Comm number' is present, then 'Comm Number Qual' is required
+    - ref_designator: PER06
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 6
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available. If 'Comm Number Qual' is present, then 'Comm number' is required
+    - ref_designator: PER07
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 7
+      data_element: 365
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER08 element. If 'Comm number' is present, then 'Comm Number Qual' is required
+    - ref_designator: PER08
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 8
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available. If 'Comm Number Qual' is present, then 'Comm number' is required
+    - ref_designator: PER09
+      name: contact inquiry reference
+      data_type: AN
+      min_length: 1
+      max_length: 20
+      usage:
+      - O
+      order: 9
+      data_element: 443
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: N3
+    name: member residence street address
+    position: 320
+    usage:
+    - S
+    repeat: 1
+    max_elements: 2
+    elements:
+    - ref_designator: N301
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - M
+      order: 1
+      data_element: 166
+      notes: Address Information. Member Address Line
+    - ref_designator: N302
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - O
+      order: 2
+      data_element: 166
+      notes: Address Information. Member Address Line. Required if a second address line exists
+  - segment_code: N4
+    name: member city, state, zip code
+    position: 384
+    usage:
+    - S
+    repeat: 1
+    max_elements: 7
+    syntax:
+    - E0207
+    - C0605
+    - C0704
+    elements:
+    - ref_designator: N401
+      name: city name
+      data_type: AN
+      min_length: 2
+      max_length: 30
+      usage:
+      - O
+      order: 1
+      data_element: 19
+      notes: Free-form text for city name
+    - ref_designator: N402
+      name: state or prov code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 2
+      data_element: 156
+      notes: Code (Standard State/Province) as defined by appropriate government agency. Only one of 'State or Prov Code', 'Country Sub Code' may be present
+    - ref_designator: N403
+      name: postal code
+      data_type: ID
+      min_length: 3
+      max_length: 15
+      usage:
+      - O
+      order: 3
+      data_element: 116
+      notes: Code defining international postal zone code excluding punctuation and blanks
+    - ref_designator: N404
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 4
+      data_element: 26
+      notes: Code identifying the country.If 'Country Sub Code' is present, then 'Country Code' is required
+    - ref_designator: N405
+      name: location qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 5
+      data_element: 309
+      qualifier:
+      - 60
+      - CY
+      notes: 'Code identifying type of location (For eg) : 60- Area, CY- County/Parish.If ''Location Identifier'' is present, then ''Location Qualifier'' is required'
+    - ref_designator: N406
+      name: location identifier
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - O
+      order: 6
+      data_element: 310
+      notes: Code which identifies a specific location
+    - ref_designator: N407
+      name: country sub code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 7
+      data_element: 1715
+      notes: Code identifying the country subdivision. Only one of 'State or Prov Code', 'Country Sub Code' may be present
+  - segment_code: DMG
+    name: member demographics
+    position: 0800
+    usage:
+    - S
+    repeat: 1
+    max_elements: 13
+    syntax:
+    - P0102
+    - P1011
+    - C1105
+    elements:
+    - ref_designator: DMG01
+      name: date time format qual
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 1
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: 'Code indicating the date format, time format, or date and time format (For eg) : D8- Date Expressed in Format CCYYMMDD. If ''Date time period'' is present, then ''Date Time Format Qual'' is required'
+    - ref_designator: DMG02
+      name: date time period qualifier
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - X
+      order: 2
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times. If 'Date Time Format Qual' is present, then 'Date time period' is required
+    - ref_designator: DMG03
+      name: gender code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      qualifier:
+      - F
+      - M
+      - U
+      data_element: 1068
+      notes: 'Code indicating the sex of the individual (For eg) : F- Female, M- Male, U- Unknown'
+    - ref_designator: DMG04
+      name: marital status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - B
+      - D
+      - I
+      - M
+      - R
+      - S
+      - U
+      - W
+      - X
+      data_element: 1067
+      notes: 'Code defining the marital status of a person (For eg) : B- Registered Domestic Partner, D- Divorced, I- Single, M- Married'
+    - ref_designator: DMG05
+      name: composite race or ethnicity information
+      data_type: COMPOSITE
+      usage:
+      - X
+      order: 5
+      data_element: C056
+      notes: Composite element for Race or Ethnicity Information. Race or Ethnicity information is reported in either DMG05-1 or DMG05-2 and DMG05-3. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG05-1
+      name: race or ethnicity code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 1
+      qualifier:
+      - 7
+      - 8
+      - A
+      - B
+      - C
+      - D
+      - E
+      - F
+      - G
+      - H
+      - I
+      - J
+      - N
+      - O
+      - P
+      - Z
+      data_element: 1109
+      parent_composite: DMG05
+      notes: Code indicating the racial or ethnic background of a person. 7 = Not Provided, 8 = Not Applicable, A = Asian or Pacific Islander, B = Black
+    - ref_designator: DMG05-2
+      name: code list qualifier code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 2
+      qualifier:
+      - RET
+      data_element: 1270
+      parent_composite: DMG05
+      notes: Code identifying a specific industry code list. RET = Classification of Race or Ethnicity. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG05-3
+      name: industry code
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - X
+      order: 3
+      data_element: 1271
+      parent_composite: DMG05
+      notes: Code indicating a code from a specific industry code list. If either DMG05-2 or DMG05-3 is present, then the other is required.
+    - ref_designator: DMG06
+      name: citizenship status code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 6
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      data_element: 1066
+      notes: 'Code indicating citizenship status (For eg) : 1- U.S. Citizen, 2- Non-Resident Alien, 3- Resident Alien, 4- Illegal Alien'
+    - ref_designator: DMG07
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 7
+      data_element: 26
+      nots: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG08
+      name: basis of verif code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 8
+      data_element: 659
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG09
+      name: quantity
+      data_type: R
+      min_length: 1
+      max_length: 15
+      usage:
+      - O
+      order: 9
+      data_element: 380
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: DMG10
+      name: code list qual code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 10
+      qualifier:
+      - REC
+      data_element: 1270
+      notes: Code identifying a specific industry code list. REC = Race or Ethnicity Collection Code. If ''Industry Code'' is present, then ''Code List Qualifier Code'' is required'
+    - ref_designator: DMG11
+      name: industry code
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - X
+      order: 11
+      data_element: 1271
+      notes: Code indicating a code from a specific industry code list. If 'Code List Qualifier Code' is present, then 'Industry Code' is required
+  - segment_code: EC
+    name: employment class
+    position: 1000
+    usage:
+    - S
+    repeat: '>1'
+    max_elements: 6
+    elements:
+    - ref_designator: EC01
+      name: employment class code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 1
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 08
+      - 09
+      - 10
+      - 11
+      - 12
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      data_element: 1176
+      notes: 'Code indicating category of employee (For eg) : 01- Union, 02- Non-Union, 03- Executive, 04- Non-Executive'
+    - ref_designator: EC02
+      name: employment class code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 2
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 08
+      - 09
+      - 10
+      - 11
+      - 12
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      data_element: 1176
+      notes: 'Code indicating category of employee (For eg) : 01- Union, 02- Non-Union, 03- Executive, 04- Non-Executive'
+    - ref_designator: EC03
+      name: employment class code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 3
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 08
+      - 09
+      - 10
+      - 11
+      - 12
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      data_element: 1176
+      notes: 'Code indicating category of employee (For eg) : 01- Union, 02- Non-Union, 03- Executive, 04- Non-Executive'
+    - ref_designator: EC04
+      name: percent
+      data_type: R
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 4
+      data_element: 954
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: EC05
+      name: information status code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 5
+      data_element: 1201
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: EC06
+      name: occupation code
+      data_type: ID
+      min_length: 4
+      max_length: 6
+      usage:
+      - O
+      order: 6
+      data_element: 1149
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: ICM
+    name: member income
+    position: 1100
+    usage:
+    - S
+    repeat: 1
+    max_elements: 6
+    elements:
+    - ref_designator: ICM01
+      name: frequency code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 7
+      - 8
+      - 9
+      - B
+      - C
+      - H
+      - Q
+      - S
+      - U
+      data_element: 594
+      notes: 'Code indicating frequency or type of activities or actions being reported (For eg) : 1- Weekly, 2- Biweekly, 3- Semimonthly, 4- Monthly'
+    - ref_designator: ICM02
+      name: monetary amount
+      data_type: R
+      min_length: 1
+      max_length: 18
+      usage:
+      - M
+      order: 2
+      data_element: 782
+      notes: Monetary amount
+    - ref_designator: ICM03
+      name: quantity
+      data_type: R
+      min_length: 1
+      max_length: 15
+      usage:
+      - O
+      order: 3
+      data_element: 380
+      notes: Numeric value of quantity
+    - ref_designator: ICM04
+      name: location identifier
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - O
+      order: 4
+      data_element: 310
+      notes: Code which identifies a specific location
+    - ref_designator: ICM05
+      name: salary grade
+      data_type: AN
+      min_length: 1
+      max_length: 5
+      usage:
+      - O
+      order: 5
+      data_element: 1214
+      notes: The salary grade code assigned by the employer
+    - ref_designator: ICM06
+      name: currency code
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - O
+      order: 6
+      data_element: 100
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: AMT
+    name: member policy amounts
+    position: 1200
+    usage:
+    - S
+    repeat: 7
+    max_elements: 3
+    elements:
+    - ref_designator: AMT01
+      name: amount qual code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - B9
+      - C1
+      - D2
+      - EBA
+      - FK
+      - P3
+      - R
+      data_element: 522
+      notes: 'Code to qualify amount (For eg) : B9- Co-insurance - Actual, C1- Co-Payment Amount, D2- Deductible Amount, EBA- Expected Expenditure Amount'
+    - ref_designator: AMT02
+      name: monetary amount
+      data_type: R
+      min_length: 1
+      max_length: 18
+      usage:
+      - M
+      order: 2
+      data_element: 782
+      notes: Monetary amount
+    - ref_designator: AMT03
+      name: cred/debit flag code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      data_element: 478
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: HLH
+    name: member health information
+    position: 1300
+    usage:
+    - S
+    repeat: 1
+    max_elements: 7
+    elements:
+    - ref_designator: HLH01
+      name: health relate code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 1
+      qualifier:
+      - N
+      - S
+      - T
+      - U
+      - X
+      data_element: 1212
+      notes: 'Code indicating a specific health situation (For eg) : N- None, S- Substance Abuse, T- Tobacco Use, U- Unknown'
+    - ref_designator: HLH02
+      name: height
+      data_type: R
+      min_length: 1
+      max_length: 8
+      usage:
+      - O
+      order: 2
+      data_element: 65
+      notes: Vertical dimension of an object measured when the object is in the upright position
+    - ref_designator: HLH03
+      name: weight
+      data_type: R
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 3
+      data_element: 81
+      notes: Numeric value of weight
+    - ref_designator: HLH04
+      name: weight
+      data_type: R
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 4
+      data_element: 81
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HLH05
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - O
+      order: 5
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HLH06
+      name: current health code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 6
+      data_element: 1213
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: HLH07
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - O
+      order: 7
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: LUI
+    name: member language
+    position: 1500
+    usage:
+    - S
+    repeat: '>1'
+    max_elements: 5
+    syntax:
+    - P0102
+    - L040203
+    elements:
+    - ref_designator: LUI01
+      name: id code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 1
+      qualifier:
+      - LD
+      - LE
+      data_element: 66
+      notes: 'Code designating the system/method of code structure used for Identification Code (67) (For eg) : LD- NISO Z39.53 Language Codes, LE- ISO 639 Language Codes. If ''ID Code Qualifier'' is present, then ''ID Code'' is required. Required when a value is being reported in the ''Identification Code'' element'
+    - ref_designator: LUI02
+      name: id code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 2
+      data_element: 67
+      notes: Code identifying a party or other code
+    - ref_designator: LUI03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - X
+      order: 3
+      data_element: 352
+      notes: A free-form description to clarify the related data elements and their content
+    - ref_designator: LUI04
+      name: use of lang indica
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - 5
+      - 6
+      - 7
+      - 8
+      data_element: 1303
+      notes: 'Code indicating the use of a language (For eg) : 5- Language Reading, 6- Language Writing, 7- Language Speaking, 8- Native Language'
+    - ref_designator: LUI05
+      name: language prof indica
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 5
+      data_element: 1476
+      notes: NOT USED
+      skip_if_notused: true

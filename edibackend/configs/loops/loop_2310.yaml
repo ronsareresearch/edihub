@@ -1,0 +1,502 @@
+- loop_id: 2310
+  name: provider information
+  segments:
+  - segment_code: LX
+    name: provider information
+    position: 3100
+    usage:
+    - S
+    repeat: 1
+    max_elements: 1
+    elements:
+    - ref_designator: LX01
+      name: assigned number
+      data_type: N0
+      min_length: 1
+      max_length: 6
+      usage:
+      - M
+      order: 1
+      data_element: 554
+      notes: Number assigned for differentiation within a transaction set
+  - segment_code: NM1
+    name: provider name
+    position: 3200
+    usage:
+    - R
+    repeat: 1
+    max_elements: 12
+    syntax:
+    - C1203
+    - P0809
+    - C1110
+    elements:
+    - ref_designator: NM101
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 1X
+      - 3D
+      - 80
+      - FA
+      - OD
+      - P3
+      - QA
+      - QN
+      - Y2
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual
+    - ref_designator: NM102
+      name: entity type qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - 1
+      - 2
+      data_element: 1065
+      notes: Code qualifying the type of entity. 1 = Person, 2 = Non-Person Entity
+    - ref_designator: NM103
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 3
+      data_element: 1035
+      notes: Individual last name or organizational name. Required when 'Entity Type Qualifier' is equal to '1' or '2'
+    - ref_designator: NM104
+      name: name first
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - O
+      order: 4
+      data_element: 1036
+      notes: Individual first name. Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM105
+      name: name middle
+      data_type: AN
+      min_length: 1
+      max_length: 25
+      usage:
+      - O
+      order: 5
+      data_element: 1037
+      notes: Individual middle name or initial. Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM106
+      name: name prefix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 6
+      data_element: 1038
+      notes: Prefix to individual name. Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM107
+      name: name suffix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 7
+      data_element: 1039
+      notes: Suffix to individual name. Required when 'Entity Type Qualifier' is equal to '1'
+    - ref_designator: NM108
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 8
+      qualifier:
+      - 34
+      - FI
+      - SV
+      - XX
+      data_element: 66
+      notes: Code designating the system/method of code structure used for Identification Code. 34 = Social Security Number, FI = Federal Taxpayer's Identification Number, SV = Service Provider Number, XX = Centers for Medicare and Medicaid Services National Provider Identifier. Required when a value is being reported in the NM109 element
+    - ref_designator: NM109
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 9
+      data_element: 67
+      notes: Code identifying a party or other code. At least one of 'Name' or 'ID Code Qualifier' is required
+    - ref_designator: NM110
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - M
+      order: 10
+      qualifier:
+      - 25
+      - 26
+      - 72
+      data_element: 706
+      notes: Code describing entity relationship. 25 = Established Patient, 26 = Not Established Patient, 72 = Unknown
+    - ref_designator: NM111
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 11
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM112
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 12
+      data_element: 1035
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: N3
+    name: provider address
+    position: 3500
+    usage:
+    - S
+    repeat: 2
+    max_elements: 2
+    elements:
+    - ref_designator: N301
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - M
+      order: 1
+      data_element: 166
+      notes: Address Information. Provider Address Line
+    - ref_designator: N302
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - O
+      order: 2
+      data_element: 166
+      notes: Address Information. Provider Address Line. Required if a second address line exists
+  - segment_code: N4
+    name: provider city, state, zip code
+    position: 3600
+    usage:
+    - S
+    repeat: 1
+    max_elements: 7
+    syntax:
+    - E0207
+    - C0704
+    - C0605
+    elements:
+    - ref_designator: N401
+      name: city name
+      data_type: AN
+      min_length: 2
+      max_length: 30
+      usage:
+      - O
+      order: 1
+      data_element: 19
+      notes: Free-form text for city name. Provider City Name
+    - ref_designator: N402
+      name: state or province code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 2
+      data_element: 156
+      notes: Code (Standard State/Province) as defined by appropriate government agency. Provider State Code. Required when the address is in the United States of America, including its territories, or Canada
+    - ref_designator: N403
+      name: postal code
+      data_type: ID
+      min_length: 3
+      max_length: 15
+      usage:
+      - O
+      order: 3
+      data_element: 116
+      notes: Code defining international postal zone code excluding punctuation and blanks. Provider Postal Zone or ZIP Code. Required when the address is in the United States of America, including its territories, or Canada, or when a postal code exists for the country in N404
+    - ref_designator: N404
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 4
+      data_element: 26
+      notes: Code identifying the country. Provider Country Code. Required when the address is outside the United States of America. If 'Country Sub Code' is present, then 'Country Code' is required
+    - ref_designator: N405
+      name: location qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 5
+      data_element: 309
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N406
+      name: location identifier
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - O
+      order: 6
+      data_element: 310
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N407
+      name: country subdivision code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 7
+      data_element: 1715
+      notes: Code identifying the country subdivision. Required when the address is not in the United States of America, including its territories, or Canada, and the country in N404 has administrative subdivisions. Only one of 'State or Prov Code', 'Country Sub Code' may be present
+  - segment_code: PER
+    name: provider communications numbers
+    position: 3700
+    usage:
+    - S
+    repeat: 2
+    max_elements: 9
+    syntax:
+    - P0304
+    - P0506
+    - P0708
+    elements:
+    - ref_designator: PER01
+      name: contact function code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - IC
+      data_element: 366
+      notes: Code identifying the major duty or responsibility of the person or group named. IC = Information Contact
+    - ref_designator: PER02
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 2
+      data_element: 93
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: PER03
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 3
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER04 element
+    - ref_designator: PER04
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 4
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable
+    - ref_designator: PER05
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 5
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER06 element
+    - ref_designator: PER06
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 6
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available
+    - ref_designator: PER07
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 7
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - HP
+      - TE
+      - WP
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER08 element
+    - ref_designator: PER08
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 8
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available
+    - ref_designator: PER09
+      name: contact inquiry reference
+      data_type: AN
+      min_length: 1
+      max_length: 20
+      usage:
+      - O
+      order: 9
+      data_element: 443
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: PLA
+    name: provider change reason
+    position: 3950
+    usage:
+    - S
+    repeat: 1
+    max_elements: 5
+    elements:
+    - ref_designator: PLA01
+      name: action code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 2
+      data_element: 306
+      notes: Code indicating type of action. 2 = Change (Update)
+    - ref_designator: PLA02
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - 1P
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. 1P = Provider
+    - ref_designator: PLA03
+      name: date
+      data_type: DT
+      min_length: 8
+      max_length: 8
+      usage:
+      - M
+      order: 3
+      data_element: 373
+      notes: Date expressed as CCYYMMDD where CC represents the first two digits of the calendar year
+    - ref_designator: PLA04
+      name: time
+      data_type: TM
+      min_length: 4
+      max_length: 6
+      usage:
+      - O
+      order: 4
+      data_element: 337
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: PLA05
+      name: maintenance reason code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 5
+      qualifier:
+      - 14
+      - 22
+      - 46
+      - AA
+      - AB
+      - AC
+      - AD
+      - AE
+      - AF
+      - AG
+      - AH
+      - AI
+      - AJ
+      data_element: 1203
+      notes: Code identifying the reason for the maintenance change

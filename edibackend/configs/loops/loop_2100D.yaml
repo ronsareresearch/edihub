@@ -1,0 +1,387 @@
+- loop_id: 2100d
+  name: member employer
+  segments:
+  - segment_code: NM1
+    name: member employer
+    position: 192
+    usage:
+    - S
+    repeat: 1
+    max_elements: 12
+    syntax:
+    - P0809
+    - C1110
+    - C1203
+    elements:
+    - ref_designator: NM101
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 36
+      data_element: 98
+      notes: Code identifying an organizational entity, a physical location, property or an individual. 36 = Employer
+    - ref_designator: NM102
+      name: entity type qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - 1
+      - 2
+      data_element: 1065
+      notes: Code qualifying the type of entity. 1 = Person, 2 = Non-Person Entity
+    - ref_designator: NM103
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - X
+      order: 3
+      data_element: 1035
+      notes: Individual last name or organizational name. Required to send the employer name if no standard identifier is available to pass in NM109
+    - ref_designator: NM104
+      name: name first
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - O
+      order: 4
+      data_element: 1036
+      notes: Individual first name. Required when NM102 is equal to '1' (person) and the person has a first name
+    - ref_designator: NM105
+      name: name middle
+      data_type: AN
+      min_length: 1
+      max_length: 25
+      usage:
+      - O
+      order: 5
+      data_element: 1037
+      notes: Individual middle name or initial. Required if supplied by member
+    - ref_designator: NM106
+      name: name prefix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 6
+      data_element: 1038
+      notes: Prefix to individual name. Required if supplied by member
+    - ref_designator: NM107
+      name: name suffix
+      data_type: AN
+      min_length: 1
+      max_length: 10
+      usage:
+      - O
+      order: 7
+      data_element: 1039
+      notes: Suffix to individual name. Required if supplied by member
+    - ref_designator: NM108
+      name: identification code qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 8
+      qualifier:
+      - 24
+      - 34
+      data_element: 66
+      notes: Code designating the system/method of code structure used for Identification Code. 24 = Employer's Identification Number, 34 = Social Security Number. Required when a value is being reported in the NM109 element
+    - ref_designator: NM109
+      name: identification code
+      data_type: AN
+      min_length: 2
+      max_length: 80
+      usage:
+      - X
+      order: 9
+      data_element: 67
+      notes: Code identifying a party or other code. Required when supplied by the employee to the sponsor
+    - ref_designator: NM110
+      name: entity relationship code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 10
+      data_element: 706
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM111
+      name: entity identifier code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - O
+      order: 11
+      data_element: 98
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: NM112
+      name: name last or organization name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 12
+      data_element: 1035
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: PER
+    name: member employer communications numbers
+    position: 256
+    usage:
+    - S
+    repeat: 1
+    max_elements: 9
+    syntax:
+    - P0304
+    - P0506
+    - P0708
+    elements:
+    - ref_designator: PER01
+      name: contact function code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - EP
+      data_element: 366
+      notes: Code identifying the major duty or responsibility of the person or group named. EP = Employer Contact
+    - ref_designator: PER02
+      name: name
+      data_type: AN
+      min_length: 1
+      max_length: 60
+      usage:
+      - O
+      order: 2
+      data_element: 93
+      notes: Name
+    - ref_designator: PER03
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 3
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - TE
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER04 element
+    - ref_designator: PER04
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 4
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable
+    - ref_designator: PER05
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 5
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - TE
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER06 element
+    - ref_designator: PER06
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 6
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available
+    - ref_designator: PER07
+      name: communication number qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 7
+      qualifier:
+      - AP
+      - BN
+      - CP
+      - EM
+      - EX
+      - FX
+      - TE
+      data_element: 365
+      notes: Code identifying the type of communication number. Required when a value is being reported in the PER08 element
+    - ref_designator: PER08
+      name: communication number
+      data_type: AN
+      min_length: 1
+      max_length: 256
+      usage:
+      - X
+      order: 8
+      data_element: 364
+      notes: Complete communications number including country or area code when applicable. Required when additional communication numbers are available
+    - ref_designator: PER09
+      name: contact inquiry reference
+      data_type: AN
+      min_length: 1
+      max_length: 20
+      usage:
+      - O
+      order: 9
+      data_element: 443
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: N3
+    name: member employer street address
+    position: 320
+    usage:
+    - S
+    repeat: 1
+    max_elements: 2
+    elements:
+    - ref_designator: N301
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - M
+      order: 1
+      data_element: 166
+      notes: Address Information. Member Employer Address Line
+    - ref_designator: N302
+      name: address information
+      data_type: AN
+      min_length: 1
+      max_length: 55
+      usage:
+      - O
+      order: 2
+      data_element: 166
+      notes: Address Information. Member Employer Address Line. Required if a second address line exists
+  - segment_code: N4
+    name: member employer city, state, zip code
+    position: 384
+    usage:
+    - S
+    repeat: 1
+    max_elements: 7
+    syntax:
+    - E0207
+    - C0704
+    - C0605
+    elements:
+    - ref_designator: N401
+      name: city name
+      data_type: AN
+      min_length: 2
+      max_length: 30
+      usage:
+      - O
+      order: 1
+      data_element: 19
+      notes: Free-form text for city name. Member Employer City Name
+    - ref_designator: N402
+      name: state or province code
+      data_type: ID
+      min_length: 2
+      max_length: 2
+      usage:
+      - X
+      order: 2
+      data_element: 156
+      notes: Code (Standard State/Province) as defined by appropriate government agency. Member Employer State Code. Required when the address is in the United States of America, including its territories, or Canada
+    - ref_designator: N403
+      name: postal code
+      data_type: ID
+      min_length: 3
+      max_length: 15
+      usage:
+      - O
+      order: 3
+      data_element: 116
+      notes: Code defining international postal zone code excluding punctuation and blanks. Member Employer Postal Zone or ZIP Code. Required when the address is in the United States of America, including its territories, or Canada, or when a postal code exists for the country in N404
+    - ref_designator: N404
+      name: country code
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - X
+      order: 4
+      data_element: 26
+      notes: Code identifying the country. Member Employer Country Code. Required when the address is outside the United States of America. If 'Country Sub Code' is present, then 'Country Code' is required
+    - ref_designator: N405
+      name: location qualifier
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - X
+      order: 5
+      data_element: 309
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N406
+      name: location identifier
+      data_type: AN
+      min_length: 1
+      max_length: 30
+      usage:
+      - O
+      order: 6
+      data_element: 310
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: N407
+      name: country subdivision code
+      data_type: ID
+      min_length: 1
+      max_length: 3
+      usage:
+      - X
+      order: 7
+      data_element: 1715
+      notes: Code identifying the country subdivision. Required when the address is not in the United States of America, including its territories, or Canada, and the country in N404 has administrative subdivisions. Only one of 'State or Prov Code', 'Country Sub Code' may be present

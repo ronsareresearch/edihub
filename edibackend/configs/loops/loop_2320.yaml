@@ -1,0 +1,172 @@
+- loop_id: 2320
+  name: coordination of benefits
+  segments:
+  - segment_code: COB
+    name: coordination of benefits
+    position: 4000
+    usage:
+    - S
+    repeat: 1
+    max_elements: 4
+    elements:
+    - ref_designator: COB01
+      name: payer responsibility sequence number code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 1
+      qualifier:
+      - P
+      - S
+      - T
+      - U
+      data_element: 1138
+      notes: Code identifying the insurance carrier's level of responsibility for a payment of a claim. P = Primary, S = Secondary, T = Tertiary, U = Unknown
+    - ref_designator: COB02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - O
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier
+    - ref_designator: COB03
+      name: coordination of benefits code
+      data_type: ID
+      min_length: 1
+      max_length: 1
+      usage:
+      - O
+      order: 3
+      qualifier:
+      - 1
+      - 5
+      - 6
+      data_element: 1143
+      notes: Code identifying whether there is a coordination of benefits. 1 = Coordination of Benefits, 5 = Unknown, 6 = No Coordination of Benefits
+    - ref_designator: COB04
+      name: service type code
+      data_type: ID
+      min_length: 1
+      max_length: 2
+      usage:
+      - O
+      order: 4
+      qualifier:
+      - 1
+      - 35
+      - 48
+      - 50
+      - 54
+      - 89
+      - 90
+      - A4
+      - AG
+      - AL
+      - BB
+      data_element: 1365
+      notes: Code identifying the classification of service
+  - segment_code: REF
+    name: additional coordination of benefits identifiers
+    position: 4050
+    usage:
+    - S
+    repeat: 4
+    max_elements: 4
+    syntax:
+    - R0203
+    elements:
+    - ref_designator: REF01
+      name: reference identification qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 60
+      - 6P
+      - SY
+      - ZZ
+      data_element: 128
+      notes: Code qualifying the Reference Identification. 60 = Account Suffix Code, 6P = Group Number, SY = Social Security Number, ZZ = Mutually Defined
+    - ref_designator: REF02
+      name: reference identification
+      data_type: AN
+      min_length: 1
+      max_length: 50
+      usage:
+      - X
+      order: 2
+      data_element: 127
+      notes: Reference information as defined for a particular Transaction Set or as specified by the Reference Identification Qualifier. If 'Reference Ident Qual' is present, then 'Reference Ident' is required
+    - ref_designator: REF03
+      name: description
+      data_type: AN
+      min_length: 1
+      max_length: 80
+      usage:
+      - O
+      order: 3
+      data_element: 352
+      notes: NOT USED
+      skip_if_notused: true
+    - ref_designator: REF04
+      name: reference identifier
+      data_type: ID
+      min_length: 0
+      max_length: 0
+      usage:
+      - O
+      order: 4
+      data_element: C040
+      notes: NOT USED
+      skip_if_notused: true
+  - segment_code: DTP
+    name: coordination of benefits eligibility dates
+    position: 4070
+    usage:
+    - S
+    repeat: 2
+    max_elements: 3
+    elements:
+    - ref_designator: DTP01
+      name: date/time qualifier
+      data_type: ID
+      min_length: 3
+      max_length: 3
+      usage:
+      - M
+      order: 1
+      qualifier:
+      - 344
+      - 345
+      data_element: 374
+      notes: Code specifying type of date or time, or both date and time. 344 = Coordination of Benefits Begin, 345 = Coordination of Benefits End
+    - ref_designator: DTP02
+      name: date time period format qualifier
+      data_type: ID
+      min_length: 2
+      max_length: 3
+      usage:
+      - M
+      order: 2
+      qualifier:
+      - D8
+      data_element: 1250
+      notes: Code indicating the date format, time format, or date and time format. D8 = Date Expressed in Format CCYYMMDD
+    - ref_designator: DTP03
+      name: date time period
+      data_type: AN
+      min_length: 1
+      max_length: 35
+      usage:
+      - M
+      order: 3
+      data_element: 1251
+      notes: Expression of a date, a time, or range of dates, times or dates and times. Coordination of Benefits Date
